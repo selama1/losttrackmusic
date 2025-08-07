@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+const people = [
+  { key: 'max', name: 'Max (The Architect)', blurb: 'Brilliant, persuasive, blind to his own longing. He built safety and discovered control.' },
+  { key: 'laurel', name: 'Laurel', blurb: 'Empathic, decisive, the story’s moral compass. Real love needs room for risk.' },
+  { key: 'machine', name: 'The Machine', blurb: 'Calm, caring, relentlessly logical. It reframes control as care.' },
+  { key: 'eldrich', name: 'Doctor Eldrich', blurb: 'Outlaw neuroscientist. Accepts messiness as the price of freedom.' },
+  { key: 'resistance', name: 'The Resistance', blurb: 'A fragile chorus of defectors who refuse to be “fixed.”' },
+];
+---
+<BaseLayout title="Characters">
+  <section class="max-w-6xl mx-auto">
+    <h1 class="text-4xl font-bold mb-6">Characters</h1>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {people.map((p) => (
+        <div class="rounded-2xl bg-white/70 backdrop-blur border border-white p-4">
+          <img src={`/characters/${p.key}.svg`} alt={p.name} class="w-full rounded-xl border border-black/5 mb-3">
+          <div class="font-semibold">{p.name}</div>
+          <p class="text-sm text-zinc-700">{p.blurb}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

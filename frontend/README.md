@@ -1,17 +1,15 @@
-# Lost Track (Astro)
+# Lost Track (Astro — Light Psychedelic v2)
 
-Astro + Tailwind + MDX + View Transitions.
+Adds /machine/characters, /machine/music, and converts Story to MDX.
 
-## Dev
-```bash
+Dev:
+```
 npm install
 npm run dev
 ```
-
-## Build
-```bash
+Build:
+```
 npm run build
 ```
-Output: `dist/`
-
-Generated: 2025-08-07T21:09:02.186929Z
+Output: dist/
+Generated: 2025-08-07T21:26:55.568217Z
