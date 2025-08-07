@@ -1,6 +1,6 @@
-# Lost Track (Frontend)
+# Lost Track (Astro)
 
-Next.js 14 (App Router) + Tailwind CSS + Framer Motion.
+Astro + Tailwind + MDX + View Transitions.
 
 ## Dev
 ```bash
@@ -10,7 +10,8 @@ npm run dev
 
 ## Build
 ```bash
-npm run build && npm start
+npm run build
 ```
+Output: `dist/`
 
-Generated: 2025-08-07T20:16:07.936339Z
+Generated: 2025-08-07T21:09:02.186929Z
