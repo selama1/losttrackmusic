@@ -1,21 +1,18 @@
-'use client';
+'use client'
+import Link from 'next/link'
+import { motion } from 'framer-motion'
 
-import { motion } from 'framer-motion';
-
-export default function MachineLanding() {
+export default function MachineHub() {
   return (
-    <main className="max-w-5xl mx-auto">
-      <motion.h1 initial={{opacity: 0}} animate={{opacity: 1}} transition={{duration: 0.6}} className="text-4xl font-bold mb-4">
-        The Rise and Fall of the Machine
-      </motion.h1>
-      <p className="text-gray-300 max-w-3xl mb-6">
-        An immersive post-apocalyptic rock opera about love, control, and the meaning of freedom.
-      </p>
-      <div className="grid md:grid-cols-3 gap-4">
-        <a href="/machine/story" className="rounded-xl bg-white/10 p-6 hover:bg-white/20 transition">Story</a>
-        <a href="/machine/characters" className="rounded-xl bg-white/10 p-6 hover:bg-white/20 transition">Characters</a>
-        <a href="/machine/music" className="rounded-xl bg-white/10 p-6 hover:bg-white/20 transition">Music</a>
+    <section className="max-w-6xl mx-auto">
+      <motion.h1 initial={{opacity:0,y:8}} animate={{opacity:1,y:0}} className="text-4xl font-bold mb-3">The Rise and Fall of the Machine</motion.h1>
+      <p className="text-zinc-300 max-w-3xl">An immersive rock opera about love, control, and the meaning of freedom in the age of AI.</p>
+
+      <div className="grid md:grid-cols-3 gap-4 mt-8">
+        <Link href="/machine/story" className="rounded-xl bg-white/10 p-6 hover:bg-white/20 transition">Story</Link>
+        <Link href="/machine/characters" className="rounded-xl bg-white/10 p-6 hover:bg-white/20 transition">Characters</Link>
+        <Link href="/machine/music" className="rounded-xl bg-white/10 p-6 hover:bg-white/20 transition">Music</Link>
       </div>
-    </main>
+    </section>
   );
 }
