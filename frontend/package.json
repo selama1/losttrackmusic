@@ -1,6 +1,6 @@
 {
   "name": "losttrack-astro",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -13,6 +13,8 @@
     "astro": "^4.13.1",
     "@astrojs/mdx": "^3.1.1",
     "@astrojs/tailwind": "^5.1.0",
-    "clsx": "^2.1.1"
+    "@astrojs/sitemap": "^3.2.1",
+    "clsx": "^2.1.1",
+    "zod": "^3.23.8"
   }
 }

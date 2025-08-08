@@ -1,15 +1,17 @@
-# Lost Track (Astro — Light Psychedelic v2)
+# Lost Track (Astro — Blog + SEO)
 
-Adds /machine/characters, /machine/music, and converts Story to MDX.
+Astro + Tailwind + MDX + content collections + sitemap + robots.
 
-Dev:
+## Dev
 ```
 npm install
 npm run dev
 ```
-Build:
+
+## Build
 ```
 npm run build
 ```
-Output: dist/
-Generated: 2025-08-07T21:26:55.568217Z
+Output: `dist/`
+
+Generated: 2025-08-07T21:42:13.565642Z
