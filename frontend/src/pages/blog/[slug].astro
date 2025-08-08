@@ -1,10 +1,13 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
 export async function getStaticPaths() {
-  // Dynamic content: no build-time paths. Keep a placeholder.
   return [{ params: { slug: '1-placeholder' } }];
 }
-const { slug } = Astro.params;
+
+const OWNER = import.meta.env.PUBLIC_GITHUB_OWNER ?? "selama1";
+const REPO  = import.meta.env.PUBLIC_GITHUB_REPO  ?? "losttrackmusic";
+const LABEL = (import.meta.env.PUBLIC_GITHUB_BLOG_LABEL ?? "blog").toLowerCase();
 ---
 <BaseLayout title="Post">
   <article class="max-w-3xl mx-auto prose prose-zinc lg:prose-lg">
@@ -12,18 +15,17 @@ const { slug } = Astro.params;
     <div id="comments" class="not-prose mt-10"></div>
   </article>
 
-  <!-- Markdown renderer + sanitizer -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
 
-  <script type="module">
-    const owner = import.meta.env.PUBLIC_GITHUB_OWNER || "selama1";
-    const repo = import.meta.env.PUBLIC_GITHUB_REPO || "losttrackmusic";
-    const label = import.meta.env.PUBLIC_GITHUB_BLOG_LABEL || "blog";
-    const container = document.getElementById('post');
-    const comments = document.getElementById('comments');
+  <script type="module" define:vars={{ OWNER, REPO, LABEL }}>
+    const owner = OWNER;
+    const repo  = REPO;
+    const label = LABEL;
 
-    // Extract issue number from slug like "123-some-title"
+    const container = document.getElementById('post');
+    const comments  = document.getElementById('comments');
+
     const pathSlug = location.pathname.replace(/\/$/, '').split('/').pop();
     const match = pathSlug && pathSlug.match(/^(\d+)/);
     const number = match ? match[1] : null;
@@ -35,12 +37,8 @@ const { slug } = Astro.params;
       }
       try {
         const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/issues/${number}`);
-        if (!res.ok) throw new Error('GitHub API error: ' + res.status);
         const post = await res.json();
-        if (post.pull_request) throw new Error('This is a pull request, not a post.');
-        if (label && !(post.labels || []).some(l => l.name === label)) {
-          console.warn('Issue missing expected label', label);
-        }
+        if (!res.ok || post.message) throw new Error(post.message || `GitHub API ${res.status}`);
 
         document.title = post.title + " — Lost Track";
         const date = new Date(post.created_at).toLocaleDateString();
@@ -53,7 +51,6 @@ const { slug } = Astro.params;
           <div class="prose prose-zinc">${html}</div>
         `;
 
-        // Inject Giscus dynamically, mapped by issue number
         const script = document.createElement('script');
         script.src = "https://giscus.app/client.js";
         script.setAttribute('data-repo', 'selama1/losttrackmusic');
@@ -74,7 +71,7 @@ const { slug } = Astro.params;
         comments.appendChild(script);
       } catch (e) {
         console.error(e);
-        container.innerHTML = '<p class="text-red-600">Failed to load post from GitHub. Try again later.</p>';
+        container.innerHTML = `<p class="text-red-600">Failed to load post: ${String(e)}</p>`;
       }
     }
 

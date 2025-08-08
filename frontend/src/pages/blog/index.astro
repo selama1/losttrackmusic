@@ -1,29 +1,23 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const OWNER = import.meta.env.PUBLIC_GITHUB_OWNER ?? "selama1";
+const REPO  = import.meta.env.PUBLIC_GITHUB_REPO  ?? "losttrackmusic";
+const LABEL = (import.meta.env.PUBLIC_GITHUB_BLOG_LABEL ?? "blog").toLowerCase();
 ---
 <BaseLayout title="Blog">
   <main class="max-w-4xl mx-auto">
     <h1 class="text-4xl font-bold mb-2">Blog</h1>
-    <div id="repoLabel" class="text-sm text-zinc-600 mb-3"></div>
     <div id="posts" class="space-y-4"></div>
-    <pre id="debug" class="text-xs text-zinc-500 mt-6 whitespace-pre-wrap"></pre>
   </main>
 
-  <script type="module">
-    const owner = import.meta.env.PUBLIC_GITHUB_OWNER || "selama1";
-    const repo  = import.meta.env.PUBLIC_GITHUB_REPO  || "losttrackmusic";
-    const label = (import.meta.env.PUBLIC_GITHUB_BLOG_LABEL || "blog").toLowerCase();
+  <script type="module" define:vars={{ OWNER, REPO, LABEL }}>
+    const owner = OWNER;
+    const repo  = REPO;
+    const label = LABEL;
 
-    const labelEl = document.getElementById("repoLabel");
+    
     const postsEl = document.getElementById("posts");
-    const debugEl = document.getElementById("debug");
-
-    labelEl.textContent = `Source: ${owner}/${repo} (label: ${label})`;
-
-    function log(...args){
-      console.log(...args);
-      debugEl.textContent += args.map(a => typeof a==='string'?a:JSON.stringify(a,null,2)).join(' ') + "\n";
-    }
 
     function slugify(s) {
       return s.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-').replace(/-+/g, '-');
@@ -34,7 +28,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       const url  = withLabel ? base + `&labels=${encodeURIComponent(label)}` : base;
       const res  = await fetch(url);
       const data = await res.json();
-      log("Fetch", { url, status: res.status, ok: res.ok, sample: Array.isArray(data) ? data.slice(0,1) : data });
+      console.log("Fetch", { url, status: res.status, ok: res.ok, sample: Array.isArray(data) ? data.slice(0,1) : data });
       return Array.isArray(data) ? data : [];
     }
 
@@ -44,15 +38,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         const slug = `${p.number}-${slugify(p.title)}`;
         const firstPara = (p.body || '').split('\n').find(Boolean) || '';
         const img = (p.body || '').match(/!\[[^\]]*\]\((https?:[^)]+)\)/)?.[1];
-        return \`
+        return `
           <article class="rounded-2xl bg-white/70 backdrop-blur border border-white p-4">
-            \${img ? \`<img src="\${img}" alt="" class="w-full rounded-lg border mb-3" loading="lazy" decoding="async" />\` : ''}
-            <a href="/blog/\${slug}/" class="font-semibold hover:underline">\${p.title}</a>
-            <div class="text-xs text-zinc-600">\${date}</div>
-            \${firstPara ? \`<p class="text-sm text-zinc-700 mt-1">\${firstPara.substring(0, 180)}\${firstPara.length > 180 ? '…' : ''}</p>\` : ''}
-            \${p.labels?.length ? \`<div class="mt-2 flex gap-2 text-[10px] uppercase tracking-wide text-zinc-500">\${p.labels.map(l => \`<span class="px-2 py-0.5 rounded-full bg-black/5">\${l.name}</span>\`).join('')}</div>\` : ''}
+            ${img ? `<img src="${img}" alt="" class="w-full rounded-lg border mb-3" loading="lazy" decoding="async" />` : ''}
+            <a href="/blog/${slug}/" class="font-semibold hover:underline">${p.title}</a>
+            <div class="text-xs text-zinc-600">${date}</div>
+            ${firstPara ? `<p class="text-sm text-zinc-700 mt-1">${firstPara.substring(0, 180)}${firstPara.length > 180 ? '…' : ''}</p>` : ''}
+            ${p.labels?.length ? `<div class="mt-2 flex gap-2 text-[10px] uppercase tracking-wide text-zinc-500">${p.labels.map(l => `<span class="px-2 py-0.5 rounded-full bg-black/5">${l.name}</span>`).join('')}</div>` : ''}
           </article>
-        \`;
+        `;
       }).join('');
     }
 
@@ -68,7 +62,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       }
 
       if (!issues.length) {
-        postsEl.innerHTML = \`<p class="text-zinc-600">No posts found for <b>\${owner}/\${repo}</b> with label <b>\${label}</b>.</p>\`;
+        postsEl.innerHTML = `<p class="text-zinc-600">No posts found for <b>${owner}/${repo}</b> with label <b>${label}</b>.</p>`;
         return;
       }
 
