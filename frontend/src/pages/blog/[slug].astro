@@ -2,11 +2,13 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
+  const posts = (await getCollection('blog')).filter(p => !p.data?.draft);
   return posts.map((p) => ({ params: { slug: p.slug }, props: { post: p } }));
 }
 const { post } = Astro.props;
-const { Content } = await post.render();
+const rendered = await post.render();
+const Content = rendered?.Content;
+const SafeContent = Content ?? ((_) => (<p class="text-sm text-zinc-600 italic">(No content found for this post.)</p>));
 const { title, description, date, hero, tags } = post.data;
 ---
 <BaseLayout title={title} description={description}>
@@ -19,7 +21,7 @@ const { title, description, date, hero, tags } = post.data;
       {tags && <div class="flex gap-2 mt-2 text-xs">{tags.map(t => <span class="px-2 py-1 rounded-full bg-black/5">{t}</span>)}</div>}
     </header>
     <div class="prose-invert:prose-0">
-      <Content />
+      <SafeContent />
     </div>
   </article>
 </BaseLayout>
