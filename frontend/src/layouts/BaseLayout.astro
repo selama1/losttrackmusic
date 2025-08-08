@@ -30,7 +30,10 @@ import '../styles/global.css';
         </div>
       </nav>
     </header>
-    <main class="px-6 py-10"><slot /></main>
+    <main class={`px-6 py-10 ${Astro.url.pathname.includes('/machine/characters') ? 'characters-page' : ''}`}>
+      <slot />
+    </main>
+
     <footer class="border-t border-black/10 bg-white/50 backdrop-blur">
       <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-zinc-600 flex items-center justify-between">
         <span>© {new Date().getFullYear()} Lost Track</span>
@@ -44,3 +47,28 @@ import '../styles/global.css';
     </footer>
   </body>
 </html>
+<style>
+  .characters-page {
+    position: relative;
+    background-image: url('/images/backgrounds/characters-bg.jpeg'); /* Put your image in /public/images/backgrounds/ */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: white;
+  }
+
+  /* Dark overlay for readability */
+  .characters-page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 0;
+  }
+
+  /* Make sure content appears above overlay */
+  .characters-page > * {
+    position: relative;
+    z-index: 1;
+  }
+</style>

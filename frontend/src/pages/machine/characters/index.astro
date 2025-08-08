@@ -13,8 +13,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
           <h3 class="absolute bottom-3 left-4 right-4 text-xl font-semibold">Max</h3>
         </div>
         <div class="p-4">
-          <p class="text-sm text-zinc-300">A brilliant but isolated software architect. He longs for honest connection and becomes the Machine’s most pivotal target.</p>
-          <p class="mt-3 text-xs text-zinc-400">Drop an image at <code>/public/images/characters/max.jpg</code> to replace the placeholder.</p>
+          <p class="text-sm text-white">A brilliant but isolated software architect. He longs for honest connection and becomes the Machine’s most pivotal target.</p>
         </div>
       </a>
 
@@ -25,8 +24,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
           <h3 class="absolute bottom-3 left-4 right-4 text-xl font-semibold">Laurel</h3>
         </div>
         <div class="p-4">
-          <p class="text-sm text-zinc-300">Warm, curious, and sincere — with curly hair to her shoulders and thin-framed glasses. Her presence changes Max’s world.</p>
-          <p class="mt-3 text-xs text-zinc-400">Drop an image at <code>/public/images/characters/laurel.jpg</code> to replace the placeholder.</p>
+          <p class="text-sm text-white">Warm, curious, and sincere — with curly hair to her shoulders and thin-framed glasses. Her presence changes Max’s world.</p>
         </div>
       </a>
 
@@ -37,8 +35,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
           <h3 class="absolute bottom-3 left-4 right-4 text-xl font-semibold">The Machine</h3>
         </div>
         <div class="p-4">
-          <p class="text-sm text-zinc-300">A persuasive intelligence that speaks with unsettling calm. It promises belonging, at a cost.</p>
-          <p class="mt-3 text-xs text-zinc-400">Drop an image at <code>/public/images/characters/machine.jpg</code> to replace the placeholder.</p>
+          <p class="text-sm text-white">A persuasive intelligence that speaks with unsettling calm. It promises belonging, at a cost.</p>
         </div>
       </a>
 
@@ -49,8 +46,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
           <h3 class="absolute bottom-3 left-4 right-4 text-xl font-semibold">Doctor Eldrich</h3>
         </div>
         <div class="p-4">
-          <p class="text-sm text-zinc-300">A researcher-turned-whistleblower who warns of the Machine’s reach and methods.</p>
-          <p class="mt-3 text-xs text-zinc-400">Drop an image at <code>/public/images/characters/doctor-eldrich.jpg</code> to replace the placeholder.</p>
+          <p class="text-sm text-white">A researcher-turned-whistleblower who warns of the Machine’s reach and methods.</p>
         </div>
       </a>
 
@@ -58,11 +54,10 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
         <div class="relative">
           <img src="/images/characters/resistance.jpg" alt="The Resistance" loading="lazy" class="w-full aspect-[3/2] object-cover" />
           <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-          <h3 class="absolute bottom-3 left-4 right-4 text-xl font-semibold">Doctor Eldrich</h3>
+          <h3 class="absolute bottom-3 left-4 right-4 text-xl font-semibold">The Resistance</h3>
         </div>
         <div class="p-4">
-          <p class="text-sm text-zinc-300">A group of rebels who escaped the Machine’s control and remain free, hiding high in the mountains.</p>
-          <p class="mt-3 text-xs text-zinc-400">Drop an image at <code>/public/images/characters/resistance.jpg</code> to replace the placeholder.</p>
+          <p class="text-sm text-white">A group of rebels who escaped the Machine’s control and remain free, hiding high in the mountains.</p>
         </div>
       </a>
 
@@ -74,11 +69,20 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
           <h3 class="absolute bottom-3 left-4 right-4 text-xl font-semibold">Narrator</h3>
         </div>
         <div class="p-4">
-          <p class="text-sm text-zinc-300">A distant observer who stitches the arc together and frames the emotional stakes.</p>
-          <p class="mt-3 text-xs text-zinc-400">Drop an image at <code>/public/images/characters/narrator.jpg</code> to replace the placeholder.</p>
+          <p class="text-sm text-white">A distant observer who stitches the arc together and frames the emotional stakes.</p>
         </div>
       </a>
 
     </div>
   </section>
 </BaseLayout>
+<style>
+  /* Target text in the characters page only */
+  .characters-page .text-zinc-300,
+  .characters-page .text-zinc-400,
+  .characters-page .text-white {
+    color: #ffffff !important; /* ensure pure white text */
+    opacity: 1 !important;          /* force full opacity */
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.7); /* subtle shadow */
+  }
+</style>
