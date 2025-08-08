@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+const songs = (await getCollection('songs')).sort((a,b)=>a.data.order-b.data.order);
+---
+<BaseLayout title="Songs — The Rise and Fall of the Machine">
+  <section class="max-w-6xl mx-auto">
+    <h1 class="text-4xl font-bold mb-6">Songs</h1>
+    <ol class="grid md:grid-cols-2 gap-3 list-decimal list-inside">
+      {songs.map(({ slug, data }) => (
+        <li class="rounded-xl bg-white/60 backdrop-blur border border-white px-4 py-3">
+          <a class="hover:underline" href={`/machine/songs/${slug}`}>{data.title}</a>
+          <span class="ml-2 text-xs uppercase text-zinc-500">{data.act}</span>
+        </li>
+      ))}
+    </ol>
+  </section>
+</BaseLayout>
