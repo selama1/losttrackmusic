@@ -8,7 +8,6 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const rendered = await post.render();
 const Content = rendered?.Content;
-const SafeContent = Content ?? ((_) => (<p class="text-sm text-zinc-600 italic">(No content found for this post.)</p>));
 const { title, description, date, hero, tags } = post.data;
 ---
 <BaseLayout title={title} description={description}>
@@ -18,10 +17,16 @@ const { title, description, date, hero, tags } = post.data;
       <div class="text-xs text-zinc-600">{new Date(date).toLocaleDateString()}</div>
       {hero && <img src={hero} alt="" class="w-full rounded-xl border my-4" />}
       {description && <p class="text-zinc-700">{description}</p>}
-      {tags && <div class="flex gap-2 mt-2 text-xs">{tags.map(t => <span class="px-2 py-1 rounded-full bg-black/5">{t}</span>)}</div>}
+      {tags && (
+        <div class="flex gap-2 mt-2 text-xs">
+          {tags.map((t) => (
+            <span class="px-2 py-1 rounded-full bg-black/5">{t}</span>
+          ))}
+        </div>
+      )}
     </header>
     <div class="prose-invert:prose-0">
-      <SafeContent />
+      {Content ? <Content /> : <p class="text-sm text-zinc-600 italic">(No content found for this post.)</p>}
     </div>
   </article>
 </BaseLayout>

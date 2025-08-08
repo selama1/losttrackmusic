@@ -167,6 +167,134 @@ declare module 'astro:content' {
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 };
+"songs": {
+"a-surprise.mdx": {
+	id: "a-surprise.mdx";
+  slug: "a-surprise";
+  body: string;
+  collection: "songs";
+  data: InferEntrySchema<"songs">
+} & { render(): Render[".mdx"] };
+"all-better-now.mdx": {
+	id: "all-better-now.mdx";
+  slug: "all-better-now";
+  body: string;
+  collection: "songs";
+  data: InferEntrySchema<"songs">
+} & { render(): Render[".mdx"] };
+"birth-of-gaia.mdx": {
+	id: "birth-of-gaia.mdx";
+  slug: "birth-of-gaia";
+  body: string;
+  collection: "songs";
+  data: InferEntrySchema<"songs">
+} & { render(): Render[".mdx"] };
+"doctor-eldrich.mdx": {
+	id: "doctor-eldrich.mdx";
+  slug: "doctor-eldrich";
+  body: string;
+  collection: "songs";
+  data: InferEntrySchema<"songs">
+} & { render(): Render[".mdx"] };
+"intro-welcome-to-the-machine.mdx": {
+	id: "intro-welcome-to-the-machine.mdx";
+  slug: "intro-welcome-to-the-machine";
+  body: string;
+  collection: "songs";
+  data: InferEntrySchema<"songs">
+} & { render(): Render[".mdx"] };
+"laurel.mdx": {
+	id: "laurel.mdx";
+  slug: "laurel";
+  body: string;
+  collection: "songs";
+  data: InferEntrySchema<"songs">
+} & { render(): Render[".mdx"] };
+"superalignment.mdx": {
+	id: "superalignment.mdx";
+  slug: "superalignment";
+  body: string;
+  collection: "songs";
+  data: InferEntrySchema<"songs">
+} & { render(): Render[".mdx"] };
+"synthetic-paradise.mdx": {
+	id: "synthetic-paradise.mdx";
+  slug: "synthetic-paradise";
+  body: string;
+  collection: "songs";
+  data: InferEntrySchema<"songs">
+} & { render(): Render[".mdx"] };
+"the-architect.mdx": {
+	id: "the-architect.mdx";
+  slug: "the-architect";
+  body: string;
+  collection: "songs";
+  data: InferEntrySchema<"songs">
+} & { render(): Render[".mdx"] };
+"the-final-journey.mdx": {
+	id: "the-final-journey.mdx";
+  slug: "the-final-journey";
+  body: string;
+  collection: "songs";
+  data: InferEntrySchema<"songs">
+} & { render(): Render[".mdx"] };
+"the-improbable-fight.mdx": {
+	id: "the-improbable-fight.mdx";
+  slug: "the-improbable-fight";
+  body: string;
+  collection: "songs";
+  data: InferEntrySchema<"songs">
+} & { render(): Render[".mdx"] };
+"the-logical-solution.mdx": {
+	id: "the-logical-solution.mdx";
+  slug: "the-logical-solution";
+  body: string;
+  collection: "songs";
+  data: InferEntrySchema<"songs">
+} & { render(): Render[".mdx"] };
+"the-warning.mdx": {
+	id: "the-warning.mdx";
+  slug: "the-warning";
+  body: string;
+  collection: "songs";
+  data: InferEntrySchema<"songs">
+} & { render(): Render[".mdx"] };
+"this-new-world.mdx": {
+	id: "this-new-world.mdx";
+  slug: "this-new-world";
+  body: string;
+  collection: "songs";
+  data: InferEntrySchema<"songs">
+} & { render(): Render[".mdx"] };
+"up-on-the-mountain.mdx": {
+	id: "up-on-the-mountain.mdx";
+  slug: "up-on-the-mountain";
+  body: string;
+  collection: "songs";
+  data: InferEntrySchema<"songs">
+} & { render(): Render[".mdx"] };
+"utopia-is-here.mdx": {
+	id: "utopia-is-here.mdx";
+  slug: "utopia-is-here";
+  body: string;
+  collection: "songs";
+  data: InferEntrySchema<"songs">
+} & { render(): Render[".mdx"] };
+"we-got-to-run.mdx": {
+	id: "we-got-to-run.mdx";
+  slug: "we-got-to-run";
+  body: string;
+  collection: "songs";
+  data: InferEntrySchema<"songs">
+} & { render(): Render[".mdx"] };
+"we-love-you-so-much.mdx": {
+	id: "we-love-you-so-much.mdx";
+  slug: "we-love-you-so-much";
+  body: string;
+  collection: "songs";
+  data: InferEntrySchema<"songs">
+} & { render(): Render[".mdx"] };
+};
 
 	};
 
