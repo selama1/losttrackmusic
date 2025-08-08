@@ -1,32 +1,83 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
 export async function getStaticPaths() {
-  const posts = (await getCollection('blog')).filter(p => !p.data?.draft);
-  return posts.map((p) => ({ params: { slug: p.slug }, props: { post: p } }));
+  // Dynamic content: no build-time paths. Keep a placeholder.
+  return [{ params: { slug: '1-placeholder' } }];
 }
-const { post } = Astro.props;
-const rendered = await post.render();
-const Content = rendered?.Content;
-const { title, description, date, hero, tags } = post.data;
+const { slug } = Astro.params;
 ---
-<BaseLayout title={title} description={description}>
+<BaseLayout title="Post">
   <article class="max-w-3xl mx-auto prose prose-zinc lg:prose-lg">
-    <header class="not-prose mb-6">
-      <h1 class="text-4xl font-bold">{title}</h1>
-      <div class="text-xs text-zinc-600">{new Date(date).toLocaleDateString()}</div>
-      {hero && <img src={hero} alt="" class="w-full rounded-xl border my-4" />}
-      {description && <p class="text-zinc-700">{description}</p>}
-      {tags && (
-        <div class="flex gap-2 mt-2 text-xs">
-          {tags.map((t) => (
-            <span class="px-2 py-1 rounded-full bg-black/5">{t}</span>
-          ))}
-        </div>
-      )}
-    </header>
-    <div class="prose-invert:prose-0">
-      {Content ? <Content /> : <p class="text-sm text-zinc-600 italic">(No content found for this post.)</p>}
-    </div>
+    <div id="post"></div>
+    <div id="comments" class="not-prose mt-10"></div>
   </article>
+
+  <!-- Markdown renderer + sanitizer -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
+
+  <script type="module">
+    const owner = import.meta.env.PUBLIC_GITHUB_OWNER || "selama1";
+    const repo = import.meta.env.PUBLIC_GITHUB_REPO || "losttrackmusic";
+    const label = import.meta.env.PUBLIC_GITHUB_BLOG_LABEL || "blog";
+    const container = document.getElementById('post');
+    const comments = document.getElementById('comments');
+
+    // Extract issue number from slug like "123-some-title"
+    const pathSlug = location.pathname.replace(/\/$/, '').split('/').pop();
+    const match = pathSlug && pathSlug.match(/^(\d+)/);
+    const number = match ? match[1] : null;
+
+    async function loadPost() {
+      if (!number) {
+        container.innerHTML = '<p class="text-zinc-600">Invalid post URL.</p>';
+        return;
+      }
+      try {
+        const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/issues/${number}`);
+        if (!res.ok) throw new Error('GitHub API error: ' + res.status);
+        const post = await res.json();
+        if (post.pull_request) throw new Error('This is a pull request, not a post.');
+        if (label && !(post.labels || []).some(l => l.name === label)) {
+          console.warn('Issue missing expected label', label);
+        }
+
+        document.title = post.title + " — Lost Track";
+        const date = new Date(post.created_at).toLocaleDateString();
+        const html = DOMPurify.sanitize(marked.parse(post.body || ''));
+        container.innerHTML = `
+          <header class="not-prose mb-6">
+            <h1 class="text-4xl font-bold">${post.title}</h1>
+            <div class="text-xs text-zinc-600">${date}</div>
+          </header>
+          <div class="prose prose-zinc">${html}</div>
+        `;
+
+        // Inject Giscus dynamically, mapped by issue number
+        const script = document.createElement('script');
+        script.src = "https://giscus.app/client.js";
+        script.setAttribute('data-repo', 'selama1/losttrackmusic');
+        script.setAttribute('data-repo-id', 'R_kgDOPaJYhA');
+        script.setAttribute('data-category', 'General');
+        script.setAttribute('data-category-id', 'DIC_kwDOPaJYhM4Ct7PV');
+        script.setAttribute('data-mapping', 'number');
+        script.setAttribute('data-term', String(number));
+        script.setAttribute('data-strict', '0');
+        script.setAttribute('data-reactions-enabled', '1');
+        script.setAttribute('data-emit-metadata', '0');
+        script.setAttribute('data-input-position', 'top');
+        script.setAttribute('data-theme', 'preferred_color_scheme');
+        script.setAttribute('data-lang', 'en');
+        script.setAttribute('crossorigin', 'anonymous');
+        script.async = true;
+        comments.innerHTML = '<h2 class="text-xl font-semibold mb-3">Comments</h2>';
+        comments.appendChild(script);
+      } catch (e) {
+        console.error(e);
+        container.innerHTML = '<p class="text-red-600">Failed to load post from GitHub. Try again later.</p>';
+      }
+    }
+
+    loadPost();
+  </script>
 </BaseLayout>

@@ -1,6 +1,8 @@
 ---
+import NewsletterSignup from '../../components/NewsletterSignup.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
+import NewsletterSignup from '../../components/NewsletterSignup.astro';
 <BaseLayout title="The Rise and Fall of the Machine">
   <section class="max-w-6xl mx-auto">
     <img src="/hero-machine.svg" alt="" class="w-full rounded-2xl border border-white mb-6 shadow-glow"/>
@@ -11,5 +13,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <a href="/machine/characters" class="rounded-xl bg-white/70 backdrop-blur p-6 border border-white hover:bg-white transition">Characters</a>
       <a href="/machine/music" class="rounded-xl bg-white/70 backdrop-blur p-6 border border-white hover:bg-white transition">Music</a>
     </div>
+  
+  <section id="subscribe" class="max-w-3xl mx-auto mt-10">
+    <h2 class="text-2xl font-semibold mb-3">Get updates</h2>
+    <NewsletterSignup />
   </section>
+</section>
 </BaseLayout>
