@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Debug: GitHub Issues">
+  <main class="max-w-5xl mx-auto">
+    <h1 class="text-3xl font-bold mb-4">Debug: GitHub Issues</h1>
+    <p class="text-zinc-700 mb-4">This page fetches Issues from GitHub and prints everything we need to diagnose.</p>
+
+    <div class="rounded-xl border border-white bg-white/70 backdrop-blur p-4">
+      <div id="env" class="text-sm text-zinc-700"></div>
+    </div>
+
+    <div class="mt-6 rounded-xl border border-white bg-white/70 backdrop-blur p-4">
+      <h2 class="font-semibold mb-2">Fetch result</h2>
+      <pre id="result" class="whitespace-pre-wrap text-xs"></pre>
+    </div>
+
+    <div class="mt-6 rounded-xl border border-white bg-white/70 backdrop-blur p-4">
+      <h2 class="font-semibold mb-2">Posts parsed</h2>
+      <pre id="posts" class="whitespace-pre-wrap text-xs"></pre>
+    </div>
+  </main>
+
+  <script type="module">
+    const owner = import.meta.env.PUBLIC_GITHUB_OWNER || "selama1";
+    const repo = import.meta.env.PUBLIC_GITHUB_REPO || "losttrackmusic";
+    const label = (import.meta.env.PUBLIC_GITHUB_BLOG_LABEL || "blog");
+
+    document.getElementById('env').textContent = [
+      "owner=" + owner,
+      "repo=" + repo,
+      "label=" + label
+    ].join(" | ");
+
+    const url = `https://api.github.com/repos/${owner}/${repo}/issues?state=open&per_page=50&labels=${encodeURIComponent(label)}`;
+
+    const $result = document.getElementById('result');
+    const $posts = document.getElementById('posts');
+
+    function logResult(obj) {
+      $result.textContent = JSON.stringify(obj, null, 2);
+    }
+
+    function logPosts(arr) {
+      $posts.textContent = JSON.stringify(arr, null, 2);
+    }
+
+    fetch(url).then(async (r) => {
+      const text = await r.text();
+      let data = null;
+      try { data = JSON.parse(text); } catch (e) { /* not JSON */ }
+      logResult({ url, status: r.status, ok: r.ok, raw: text.slice(0, 1000) });
+      if (!Array.isArray(data)) { logPosts([{ error: "Response not array", data }]); return; }
+      const posts = data.filter(i => !i.pull_request).map(i => ({
+        number: i.number,
+        title: i.title,
+        state: i.state,
+        labels: (i.labels || []).map(l => l.name),
+        created_at: i.created_at
+      }));
+      logPosts(posts);
+    }).catch(e => {
+      logResult({ url, error: String(e) });
+    });
+  </script>
+</BaseLayout>
