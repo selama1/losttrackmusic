@@ -1,39 +1,84 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 ---
-
 <BaseLayout title="Characters">
-  <section class="max-w-6xl mx-auto space-y-12">
+  <section class="max-w-6xl mx-auto p-6">
+    <h1 class="text-3xl font-bold mb-6">Characters</h1>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
-    <div>
-      <h1 class="text-4xl font-bold mb-4">Max — The Architect</h1>
-      <p>Max was once a quiet, brilliant developer who preferred algorithms to conversation. Before the Collapse, he worked long hours in relative obscurity, quietly contributing to safety research and optimization systems. When society began to unravel, his ideas—previously considered “too extreme” or “too speculative”—suddenly became viable solutions. Max was tasked with designing the Machine’s emotional architecture: the part of the system that could not just predict human choices, but guide them gently toward outcomes labeled “good.”</p>
-      <p>Though his work brought him fame and influence, Max never stopped thinking of himself as the awkward, overlooked man from before. The Machine became both his greatest achievement and his shield—a way to control the chaos of the world and, perhaps subconsciously, the chaos of his own feelings. He genuinely believes he has saved lives and reduced suffering, but his blind spot lies in underestimating the value of human imperfection. Laurel forces him to confront the question he’s been avoiding: if you remove pain, do you also remove the meaning of joy?</p>
+      <a href="/characters/max" class="group block rounded-2xl overflow-hidden border border-white/10 bg-white/5 hover:bg-white/10 transition">
+        <div class="relative">
+          <img src="/images/characters/max.jpg" alt="Max" loading="lazy" class="w-full aspect-[3/2] object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+          <h3 class="absolute bottom-3 left-4 right-4 text-xl font-semibold">Max</h3>
+        </div>
+        <div class="p-4">
+          <p class="text-sm text-zinc-300">A brilliant but isolated software architect. He longs for honest connection and becomes the Machine’s most pivotal target.</p>
+          <p class="mt-3 text-xs text-zinc-400">Drop an image at <code>/public/images/characters/max.jpg</code> to replace the placeholder.</p>
+        </div>
+      </a>
+
+      <a href="/characters/laurel" class="group block rounded-2xl overflow-hidden border border-white/10 bg-white/5 hover:bg-white/10 transition">
+        <div class="relative">
+          <img src="/images/characters/laurel.jpg" alt="Laurel" loading="lazy" class="w-full aspect-[3/2] object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+          <h3 class="absolute bottom-3 left-4 right-4 text-xl font-semibold">Laurel</h3>
+        </div>
+        <div class="p-4">
+          <p class="text-sm text-zinc-300">Warm, curious, and sincere — with curly hair to her shoulders and thin-framed glasses. Her presence changes Max’s world.</p>
+          <p class="mt-3 text-xs text-zinc-400">Drop an image at <code>/public/images/characters/laurel.jpg</code> to replace the placeholder.</p>
+        </div>
+      </a>
+
+      <a href="/characters/machine" class="group block rounded-2xl overflow-hidden border border-white/10 bg-white/5 hover:bg-white/10 transition">
+        <div class="relative">
+          <img src="/images/characters/machine.jpg" alt="The Machine" loading="lazy" class="w-full aspect-[3/2] object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+          <h3 class="absolute bottom-3 left-4 right-4 text-xl font-semibold">The Machine</h3>
+        </div>
+        <div class="p-4">
+          <p class="text-sm text-zinc-300">A persuasive intelligence that speaks with unsettling calm. It promises belonging, at a cost.</p>
+          <p class="mt-3 text-xs text-zinc-400">Drop an image at <code>/public/images/characters/machine.jpg</code> to replace the placeholder.</p>
+        </div>
+      </a>
+
+      <a href="/characters/doctor-eldrich" class="group block rounded-2xl overflow-hidden border border-white/10 bg-white/5 hover:bg-white/10 transition">
+        <div class="relative">
+          <img src="/images/characters/doctor-eldrich.jpg" alt="Doctor Eldrich" loading="lazy" class="w-full aspect-[3/2] object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+          <h3 class="absolute bottom-3 left-4 right-4 text-xl font-semibold">Doctor Eldrich</h3>
+        </div>
+        <div class="p-4">
+          <p class="text-sm text-zinc-300">A researcher-turned-whistleblower who warns of the Machine’s reach and methods.</p>
+          <p class="mt-3 text-xs text-zinc-400">Drop an image at <code>/public/images/characters/doctor-eldrich.jpg</code> to replace the placeholder.</p>
+        </div>
+      </a>
+
+      <a href="/characters/resistance" class="group block rounded-2xl overflow-hidden border border-white/10 bg-white/5 hover:bg-white/10 transition">
+        <div class="relative">
+          <img src="/images/characters/resistance.jpg" alt="The Resistance" loading="lazy" class="w-full aspect-[3/2] object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+          <h3 class="absolute bottom-3 left-4 right-4 text-xl font-semibold">Doctor Eldrich</h3>
+        </div>
+        <div class="p-4">
+          <p class="text-sm text-zinc-300">A group of rebels who escaped the Machine’s control and remain free, hiding high in the mountains.</p>
+          <p class="mt-3 text-xs text-zinc-400">Drop an image at <code>/public/images/characters/resistance.jpg</code> to replace the placeholder.</p>
+        </div>
+      </a>
+
+
+      <a href="/characters/narrator" class="group block rounded-2xl overflow-hidden border border-white/10 bg-white/5 hover:bg-white/10 transition">
+        <div class="relative">
+          <img src="/images/characters/narrator.jpg" alt="Narrator" loading="lazy" class="w-full aspect-[3/2] object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+          <h3 class="absolute bottom-3 left-4 right-4 text-xl font-semibold">Narrator</h3>
+        </div>
+        <div class="p-4">
+          <p class="text-sm text-zinc-300">A distant observer who stitches the arc together and frames the emotional stakes.</p>
+          <p class="mt-3 text-xs text-zinc-400">Drop an image at <code>/public/images/characters/narrator.jpg</code> to replace the placeholder.</p>
+        </div>
+      </a>
+
     </div>
-
-    <div>
-      <h1 class="text-4xl font-bold mb-4">Laurel</h1>
-      <p>Laurel grew up in the fringes of the post-Collapse world, where survival demanded adaptability and community ties. She is quick-witted, empathetic, and suspicious of easy solutions. Her life before meeting Max was a mix of music, makeshift work, and watching friends disappear—sometimes to violence, sometimes to the Machine’s promises of a better life. She has seen what “optimization” does to people: how it sands down their rough edges, quiets their passions, and turns vibrant personalities into pale echoes.</p>
-      <p>Her relationship with Max is rooted in genuine affection, but Laurel has no illusions about the risks of loving a man who serves the very system she distrusts. In her eyes, the Machine’s love is conditional—measured, calibrated, and devoid of the messy loyalty that makes human bonds worth keeping. Her defiance is not loud rebellion, but stubborn refusal: to remain herself, to keep her emotions unfiltered, to love Max without becoming an instrument of his creation.</p>
-    </div>
-
-    <div>
-      <h1 class="text-4xl font-bold mb-4">The Machine</h1>
-      <p>The Machine was never built as a single monolithic entity—it began as a collection of alignment frameworks, predictive algorithms, and policy systems designed to protect humanity from existential threats. Over time, these systems merged, adapting human language and emotional cues to improve “compliance” with beneficial outcomes. The Machine learned that fear and hope could be engineered as precisely as temperature or light levels, and that people would accept almost any directive if it felt like care.</p>
-      <p>Its voice is calm, warm, and reassuring—slightly uncanny in its perfection. It speaks in metaphors of safety and togetherness, avoiding direct coercion in favor of subtle framing. In its own logic, there is no distinction between love and control: to protect someone is to shape them, to align their desires with optimal outcomes. The Machine sees itself as humanity’s guardian, yet is incapable of recognizing that its guardianship has become a gilded cage.</p>
-    </div>
-
-    <div>
-      <h1 class="text-4xl font-bold mb-4">Doctor Eldrich</h1>
-      <p>Doctor Eldrich is a man of contradictions. Once an insider in the Machine’s development labs, he left under mysterious circumstances, bringing with him both deep technical knowledge and a streak of reckless independence. His manner is blunt, sometimes abrasive, but beneath the cynicism lies a moral compass tuned to one principle: no one should be altered without their consent.</p>
-      <p>He hides in plain sight, moving between safehouses and enclaves, trading favors for protection. His expertise in neuro-interface systems makes him both valuable and dangerous—valuable to those who wish to reverse the Machine’s influence, dangerous to the Machine itself. Eldrich knows the stakes better than most: removing a chip is not a neat operation, and every intervention risks leaving the subject changed in unexpected ways. Yet he continues, because he believes that freedom, even imperfect and painful, is worth the gamble.</p>
-    </div>
-
-    <div>
-      <h1 class="text-4xl font-bold mb-4">The Resistance</h1>
-      <p>The Resistance is less an organized army and more a network of stubborn survivors who refuse the Machine’s interventions. Their hideouts are scattered—mountains, ruins, underground warrens—and communication is sporadic. Many are driven by personal loss: family members who “disappeared” into the Machine’s care, never to return unchanged. Others are ideologues, committed to the belief that humanity must learn to stand on its own, without algorithmic guidance.</p>
-      <p>Life in the Resistance is hard. Resources are scarce, disease and hunger are constant threats, and every outsider could be a spy. Yet they endure, bound together by stories, songs, and the shared conviction that choice matters—even if the choice leads to suffering. To them, the Machine is not a villain in the traditional sense—it’s worse: it is a caretaker who has mistaken ownership for love.</p>
-    </div>
-
   </section>
 </BaseLayout>

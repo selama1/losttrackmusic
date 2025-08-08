@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const name = "The Machine";
+const img = "/images/characters/machine.jpg";
+const bio = "Calm, convincing, and relentless. It promises care and efficiency, always in a voice that sounds like love.";
+---
+<BaseLayout title={`Characters — ${name}`}>
+  <article class="max-w-3xl mx-auto p-6">
+    <header class="mb-6">
+      <h1 class="text-4xl font-bold">${name}</h1>
+    </header>
+    <img src={img} alt={name} loading="lazy" class="w-full aspect-[16/9] object-cover rounded-xl border border-white/10" />
+    <p class="mt-4 text-zinc-200">${bio}</p>
+    <p class="mt-4 text-xs text-zinc-500">Replace the image by uploading a file at <code>public${img}</code>.</p>
+  </article>
+</BaseLayout>

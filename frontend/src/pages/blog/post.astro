@@ -1,10 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-export async function getStaticPaths() {
-  return [{ params: { slug: '1-placeholder' } }];
-}
-
+// Resolve env at build time
 const OWNER = import.meta.env.PUBLIC_GITHUB_OWNER ?? "selama1";
 const REPO  = import.meta.env.PUBLIC_GITHUB_REPO  ?? "losttrackmusic";
 const LABEL = (import.meta.env.PUBLIC_GITHUB_BLOG_LABEL ?? "blog").toLowerCase();
@@ -14,6 +11,10 @@ const LABEL = (import.meta.env.PUBLIC_GITHUB_BLOG_LABEL ?? "blog").toLowerCase()
     <div id="post"></div>
     <div id="comments" class="not-prose mt-10"></div>
   </article>
+
+  <noscript>
+    <p class="text-zinc-700">This page requires JavaScript. Open <code>/blog</code> and click a post.</p>
+  </noscript>
 
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
@@ -26,13 +27,12 @@ const LABEL = (import.meta.env.PUBLIC_GITHUB_BLOG_LABEL ?? "blog").toLowerCase()
     const container = document.getElementById('post');
     const comments  = document.getElementById('comments');
 
-    const pathSlug = location.pathname.replace(/\/$/, '').split('/').pop();
-    const match = pathSlug && pathSlug.match(/^(\d+)/);
-    const number = match ? match[1] : null;
+    const params = new URLSearchParams(location.search);
+    const number = params.get('i');
 
     async function loadPost() {
       if (!number) {
-        container.innerHTML = '<p class="text-zinc-600">Invalid post URL.</p>';
+        container.innerHTML = '<p class="text-zinc-600">Missing post id. Go back to <a href="/blog" class="underline">/blog</a>.</p>';
         return;
       }
       try {
@@ -51,14 +51,15 @@ const LABEL = (import.meta.env.PUBLIC_GITHUB_BLOG_LABEL ?? "blog").toLowerCase()
           <div class="prose prose-zinc">${html}</div>
         `;
 
+        // Giscus comments mapped by number
         const script = document.createElement('script');
         script.src = "https://giscus.app/client.js";
         script.setAttribute('data-repo', 'selama1/losttrackmusic');
         script.setAttribute('data-repo-id', 'R_kgDOPaJYhA');
         script.setAttribute('data-category', 'General');
         script.setAttribute('data-category-id', 'DIC_kwDOPaJYhM4Ct7PV');
-        script.setAttribute('data-mapping', 'number');
-        script.setAttribute('data-term', String(number));
+        script.setAttribute('data-mapping', 'title');
+        script.setAttribute('data-term', post.title || String(number));
         script.setAttribute('data-strict', '0');
         script.setAttribute('data-reactions-enabled', '1');
         script.setAttribute('data-emit-metadata', '0');
@@ -67,8 +68,8 @@ const LABEL = (import.meta.env.PUBLIC_GITHUB_BLOG_LABEL ?? "blog").toLowerCase()
         script.setAttribute('data-lang', 'en');
         script.setAttribute('crossorigin', 'anonymous');
         script.async = true;
-        comments.innerHTML = '<h2 id="comments" class="text-xl font-semibold mb-3">Comments</h2>' +
-  `<p class="text-sm text-zinc-600 mb-4">Have thoughts? Sign in with GitHub below to comment. If the box doesn\'t appear, <a class=\"underline\" target=\"_blank\" rel=\"noreferrer nofollow\" href=\"https://github.com/selama1/losttrackmusic/issues/${number}\">open the issue on GitHub</a>.</p>`;
+        comments.innerHTML = '<h2 class="text-xl font-semibold mb-3">Comments</h2>' +
+          `<p class="text-sm text-zinc-600 mb-4">Sign in with GitHub to comment. If you prefer, <a class="underline" target="_blank" rel="noreferrer nofollow" href="https://github.com/selama1/losttrackmusic/issues/${number}">open the issue on GitHub</a>.</p>`;
         comments.appendChild(script);
       } catch (e) {
         console.error(e);

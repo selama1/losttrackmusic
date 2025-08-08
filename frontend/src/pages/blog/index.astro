@@ -41,7 +41,7 @@ const LABEL = (import.meta.env.PUBLIC_GITHUB_BLOG_LABEL ?? "blog").toLowerCase()
         return `
           <article class="rounded-2xl bg-white/70 backdrop-blur border border-white p-4">
             ${img ? `<img src="${img}" alt="" class="w-full rounded-lg border mb-3" loading="lazy" decoding="async" />` : ''}
-            <a href="/blog/${slug}/" class="font-semibold hover:underline">${p.title}</a>
+            <a href="/blog/post?i=${p.number}" class="font-semibold hover:underline">${p.title}</a>
             <div class="text-xs text-zinc-600">${date}</div>
             ${firstPara ? `<p class="text-sm text-zinc-700 mt-1">${firstPara.substring(0, 180)}${firstPara.length > 180 ? '…' : ''}</p>` : ''}
             ${p.labels?.length ? `<div class="mt-2 flex gap-2 text-[10px] uppercase tracking-wide text-zinc-500">${p.labels.map(l => `<span class="px-2 py-0.5 rounded-full bg-black/5">${l.name}</span>`).join('')}</div>` : ''}
