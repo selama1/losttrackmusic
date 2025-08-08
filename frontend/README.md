@@ -46,3 +46,6 @@ If your issue doesn't show up on `/blog`:
 - The label must match `PUBLIC_GITHUB_BLOG_LABEL` (default `blog`) — label names are matched **case-insensitively**.
 - Check your browser DevTools → **Network** for the GitHub API request and status.
 - Rate limits: unauthenticated requests allow ~60/hour per IP. If needed, add a read-only token behind an API route.
+
+
+Note: /blog page includes debug output and shows the source repo/label at the top.

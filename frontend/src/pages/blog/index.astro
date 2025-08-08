@@ -3,81 +3,76 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
 <BaseLayout title="Blog">
   <main class="max-w-4xl mx-auto">
-    <h1 class="text-4xl font-bold mb-6">Blog</h1>
+    <h1 class="text-4xl font-bold mb-2">Blog</h1>
     <div id="repoLabel" class="text-sm text-zinc-600 mb-3"></div>
     <div id="posts" class="space-y-4"></div>
-    <div id="debug" class="text-xs text-zinc-500 mt-6"></div>
+    <pre id="debug" class="text-xs text-zinc-500 mt-6 whitespace-pre-wrap"></pre>
   </main>
 
   <script type="module">
     const owner = import.meta.env.PUBLIC_GITHUB_OWNER || "selama1";
-    const repo = import.meta.env.PUBLIC_GITHUB_REPO || "losttrackmusic";
+    const repo  = import.meta.env.PUBLIC_GITHUB_REPO  || "losttrackmusic";
     const label = (import.meta.env.PUBLIC_GITHUB_BLOG_LABEL || "blog").toLowerCase();
-    const container = document.getElementById('posts');
-    const debug = document.getElementById('debug');
-    document.getElementById("repoLabel").textContent = `Source: ${owner}/${repo} (label: ${label})`;
+
+    const labelEl = document.getElementById("repoLabel");
+    const postsEl = document.getElementById("posts");
+    const debugEl = document.getElementById("debug");
+
+    labelEl.textContent = `Source: ${owner}/${repo} (label: ${label})`;
+
+    function log(...args){
+      console.log(...args);
+      debugEl.textContent += args.map(a => typeof a==='string'?a:JSON.stringify(a,null,2)).join(' ') + "\n";
+    }
 
     function slugify(s) {
       return s.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-').replace(/-+/g, '-');
     }
 
     async function fetchIssues(withLabel = true) {
-      const baseUrl = `https://api.github.com/repos/${owner}/${repo}/issues?state=open&per_page=50`;
-      const url = withLabel ? baseUrl + `&labels=${encodeURIComponent(label)}` : baseUrl;
-      const res = await fetch(url);
+      const base = `https://api.github.com/repos/${owner}/${repo}/issues?state=open&per_page=50`;
+      const url  = withLabel ? base + `&labels=${encodeURIComponent(label)}` : base;
+      const res  = await fetch(url);
       const data = await res.json();
-      return { url, ok: res.ok, status: res.status, data };
+      log("Fetch", { url, status: res.status, ok: res.ok, sample: Array.isArray(data) ? data.slice(0,1) : data });
+      return Array.isArray(data) ? data : [];
     }
 
     function render(posts) {
-      container.innerHTML = posts.map(p => {
+      postsEl.innerHTML = posts.map(p => {
         const date = new Date(p.created_at).toLocaleDateString();
         const slug = `${p.number}-${slugify(p.title)}`;
         const firstPara = (p.body || '').split('\n').find(Boolean) || '';
         const img = (p.body || '').match(/!\[[^\]]*\]\((https?:[^)]+)\)/)?.[1];
-        return `
+        return \`
           <article class="rounded-2xl bg-white/70 backdrop-blur border border-white p-4">
-            ${img ? `<img src="${img}" alt="" class="w-full rounded-lg border mb-3" loading="lazy" decoding="async" />` : ''}
-            <a href="/blog/${slug}/" class="font-semibold hover:underline">${p.title}</a>
-            <div class="text-xs text-zinc-600">${date}</div>
-            ${firstPara ? `<p class="text-sm text-zinc-700 mt-1">${firstPara.substring(0, 180)}${firstPara.length > 180 ? '…' : ''}</p>` : ''}
-            ${p.labels?.length ? `<div class="mt-2 flex gap-2 text-[10px] uppercase tracking-wide text-zinc-500">${p.labels.map(l => `<span class="px-2 py-0.5 rounded-full bg-black/5">${l.name}</span>`).join('')}</div>` : ''}
+            \${img ? \`<img src="\${img}" alt="" class="w-full rounded-lg border mb-3" loading="lazy" decoding="async" />\` : ''}
+            <a href="/blog/\${slug}/" class="font-semibold hover:underline">\${p.title}</a>
+            <div class="text-xs text-zinc-600">\${date}</div>
+            \${firstPara ? \`<p class="text-sm text-zinc-700 mt-1">\${firstPara.substring(0, 180)}\${firstPara.length > 180 ? '…' : ''}</p>\` : ''}
+            \${p.labels?.length ? \`<div class="mt-2 flex gap-2 text-[10px] uppercase tracking-wide text-zinc-500">\${p.labels.map(l => \`<span class="px-2 py-0.5 rounded-full bg-black/5">\${l.name}</span>\`).join('')}</div>\` : ''}
           </article>
-        `;
+        \`;
       }).join('');
     }
 
-    async function run() {
-      try {
-        const primary = await fetchIssues(true);
-        let issues = Array.isArray(primary.data) ? primary.data : [];
-        issues = issues.filter(i => !i.pull_request).filter(i => (i.labels || []).some(l => (l.name || '').toLowerCase() === label));
+    (async () => {
+      let issues = await fetchIssues(true);
+      issues = issues.filter(i => !i.pull_request)
+                     .filter(i => (i.labels || []).some(l => (l.name||'').toLowerCase() === label));
 
-        if (!issues.length) {
-          const fallback = await fetchIssues(false);
-          let all = Array.isArray(fallback.data) ? fallback.data : [];
-          all = all.filter(i => !i.pull_request);
-          if (label) {
-            all = all.filter(i => (i.labels || []).some(l => (l.name || '').toLowerCase() === label));
-          }
-          issues = all;
-          debug.textContent = `No issues with label "${label}" found at ${primary.url}. Fallback fetched ${fallback.status} from ${fallback.url}.`;
-        } else {
-          debug.textContent = `Loaded ${issues.length} issue(s) from ${primary.url}.`;
-        }
-
-        if (!issues.length) {
-          container.innerHTML = `<p class="text-zinc-600">No posts yet. Make sure your repo is public and you created an <strong>open</strong> Issue with the label "<code>${label}</code>".</p>`;
-          return;
-        }
-
-        render(issues);
-      } catch (e) {
-        console.error(e);
-        container.innerHTML = '<p class="text-red-600">Failed to load posts from GitHub. Open your browser DevTools → Network → check the GitHub API response.</p>';
+      if (!issues.length) {
+        const all = await fetchIssues(false);
+        issues = all.filter(i => !i.pull_request)
+                    .filter(i => (i.labels || []).some(l => (l.name||'').toLowerCase() === label));
       }
-    }
 
-    run();
+      if (!issues.length) {
+        postsEl.innerHTML = \`<p class="text-zinc-600">No posts found for <b>\${owner}/\${repo}</b> with label <b>\${label}</b>.</p>\`;
+        return;
+      }
+
+      render(issues);
+    })();
   </script>
 </BaseLayout>
