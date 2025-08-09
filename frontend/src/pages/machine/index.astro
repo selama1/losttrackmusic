@@ -2,19 +2,109 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
 <BaseLayout title="The Rise and Fall of the Machine">
-  <section class="max-w-6xl mx-auto">
-    <img src="/hero-machine.svg" alt="" class="w-full rounded-2xl border border-white mb-6 shadow-glow"/>
-    <h1 class="text-4xl font-bold mb-3">The Rise and Fall of the Machine</h1>
-    <p class="text-zinc-700 max-w-3xl">An immersive rock opera about love, control, and the meaning of freedom in the age of AI.</p>
-    <div class="grid md:grid-cols-3 gap-4 mt-8">
-      <a href="/machine/story" class="rounded-xl bg-white/70 backdrop-blur p-6 border border-white hover:bg-white transition">Story</a>
-      <a href="/machine/characters" class="rounded-xl bg-white/70 backdrop-blur p-6 border border-white hover:bg-white transition">Characters</a>
-      <a href="/machine/music" class="rounded-xl bg-white/70 backdrop-blur p-6 border border-white hover:bg-white transition">Music</a>
+  <!-- HERO / CINEMATIC BANNER -->
+
+  <section class="relative isolate overflow-hidden min-h-[70vh] md:min-h-[78vh] flex items-end">
+    <!-- Background image and scrims -->
+    <div class="absolute inset-0 -z-10">
+      <div className="absolute inset-0 -z-10">
+        <img
+          src="/images/machine/machine-banner.jpg"
+          alt="Futuristic robot band under a ringed planet"
+          className="w-full h-full object-cover"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+      <!-- gradient scrims for legibility -->
+      <div class="absolute inset-0 bg-[radial-gradient(1200px_600px_at_70%_10%,rgba(59,130,246,0.25),transparent_70%)]"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-zinc-900/80 via-zinc-900/10 to-white/10"></div>
+      <div class="absolute inset-0 mix-blend-overlay opacity-20 bg-[linear-gradient(120deg,rgba(255,255,255,.25)_0%,rgba(255,255,255,0)_35%),radial-gradient(600px_300px_at_20%_20%,rgba(255,255,255,.15),transparent_60%)]"></div>
     </div>
-  
-  <section id="subscribe" class="max-w-3xl mx-auto mt-10">
-    <h2 class="text-2xl font-semibold mb-3">Get updates</h2>
-    <script async data-uid="1c06fc89eb" src="https://lost-track.kit.com/1c06fc89eb/index.js"></script>
+
+    <!-- Headline & CTA -->
+    <div class="max-w-7xl mx-auto w-full px-6 md:px-8 pb-10 md:pb-16">
+      <div class="max-w-4xl">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white drop-shadow">The Rise and Fall of the Machine</h1>
+        <p class="mt-4 text-lg md:text-xl text-zinc-100/90 max-w-2xl">An immersive rock opera about love, control, and the meaning of freedom in the age of AI.</p>
+        <div class="mt-7 flex flex-wrap gap-3">
+          <a href="/machine/story" class="rounded-2xl px-5 py-2.5 bg-white text-zinc-900 font-medium shadow hover:shadow-md hover:-translate-y-0.5 transition">Read the story</a>
+          <a href="/machine/music" class="rounded-2xl px-5 py-2.5 border border-white/40 text-white/95 hover:bg-white/10 backdrop-blur-sm transition">Listen to the music</a>
+        </div>
+      </div>
+    </div>
   </section>
-</section>
+
+  <!-- FEATURED NAV CARDS -->
+  <section class="relative py-14 md:py-20">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Story card -->
+        <a href="/machine/story" class="group block rounded-2xl overflow-hidden border border-white/70 bg-white/70 backdrop-blur shadow-sm hover:shadow-lg transition">
+          <div class="relative h-40">
+            <img src="/images/story/story-banner.jpg" alt="Story banner preview" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
+            <div class="absolute bottom-3 left-3 text-white text-sm px-2 py-1 rounded bg-white/10 border border-white/20">Act I–III</div>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-semibold">Story</h3>
+              <span class="text-xs rounded-full border border-black/10 px-2 py-0.5 text-zinc-600 group-hover:bg-black/5">Read</span>
+            </div>
+            <p class="mt-2 text-sm text-zinc-700">Follow Max, Laurel, and the Machine across a world that confuses care with control.</p>
+          </div>
+        </a>
+
+        <!-- Characters card -->
+        <a href="/machine/characters" class="group block rounded-2xl overflow-hidden border border-white/70 bg-white/70 backdrop-blur shadow-sm hover:shadow-lg transition">
+          <div class="relative h-40">
+            <img src="/images/characters/max-laurel.jpg" alt="Max & Laurel" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
+            <div class="absolute bottom-3 left-3 text-white text-sm px-2 py-1 rounded bg-white/10 border border-white/20">5 mains + narrator</div>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-semibold">Characters</h3>
+              <span class="text-xs rounded-full border border-black/10 px-2 py-0.5 text-zinc-600 group-hover:bg-black/5">Explore</span>
+            </div>
+            <p class="mt-2 text-sm text-zinc-700">Concise one‑liners and deeper bios that hint at what’s coming—without spoilers.</p>
+          </div>
+        </a>
+
+        <!-- Music card -->
+        <a href="/machine/music" class="group block rounded-2xl overflow-hidden border border-white/70 bg-white/70 backdrop-blur shadow-sm hover:shadow-lg transition">
+          <div class="relative h-40">
+            <img src="/images/music/waveform.jpg" alt="Music waveform" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
+            <div class="absolute bottom-3 left-3 text-white text-sm px-2 py-1 rounded bg-white/10 border border-white/20">19 tracks</div>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-semibold">Music</h3>
+              <span class="text-xs rounded-full border border-black/10 px-2 py-0.5 text-zinc-600 group-hover:bg-black/5">Listen</span>
+            </div>
+            <p class="mt-2 text-sm text-zinc-700">A cinematic mix of alt‑rock, synth, and choral textures—built for headphones.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUBSCRIBE -->
+  <section id="subscribe" class="relative py-14 md:py-20">
+    <div class="max-w-3xl mx-auto px-6 md:px-8">
+      <div class="rounded-2xl border border-white/70 bg-white/70 backdrop-blur p-6 md:p-8 shadow-sm">
+        <h2 class="text-2xl font-semibold">Get updates</h2>
+        <p class="mt-2 text-zinc-700">Be first to hear new tracks, behind‑the‑scenes notes, and release news.</p>
+        <div class="mt-5">
+          <script async data-uid="1c06fc89eb" src="https://lost-track.kit.com/1c06fc89eb/index.js"></script>
+        </div>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
+
+<style>
+  /* optional light film grain using CSS, no assets needed */
+  .grain:before{content:'';position:absolute;inset:0;opacity:.07;pointer-events:none;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/></filter><rect width="120" height="120" filter="url(%23n)" opacity="0.35"/></svg>');mix-blend-mode:overlay}
+</style>
