@@ -1,16 +1,35 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import CharacterFile from '../../components/CharacterFile.astro';
+
 const name = "Laurel";
-const img = "/images/characters/laurel.jpg";
-const bio = "Romantic and sincere, with curly hair flowing to her shoulders and thin-framed glasses. Laurel is the human heart in the story.";
+const portrait = "/images/characters/laurel.jpg";
+const bio =
+  "Laurel arrives in a lab coat and a smile, the kind of person who asks direct questions and means the kindness behind them. Her connection with Max is immediate—smart talk over dinner, a spark when hands brush—but she’s nobody’s accessory. She names what she sees, even when it’s uncomfortable. When the world starts calling unnatural things “normal,” Laurel won’t. She refuses the role of a damsel and insists on agency, even at a cost; her compass points to joy that doesn’t require surrender. She’s the one who says, “Look around you,” when easy answers start to feel too easy. ";
+
+const fields = [
+  { label: "Status", value: "Active" },
+  { label: "Affiliation", value: "Global Alliance" },
+  { label: "Risk Level", value: "Low" },
+];
 ---
 <BaseLayout title={`Characters — ${name}`}>
-  <article class="max-w-3xl mx-auto p-6">
-    <header class="mb-6">
-      <h1 class="text-4xl font-bold">{name}</h1>
-    </header>
-    <img src={img} alt={name} loading="lazy" class="w-full aspect-[16/9] object-cover rounded-xl border border-white/10" />
-    <p class="mt-4 text-zinc-200">${bio}</p>
-    <p class="mt-4 text-xs text-zinc-500">Replace the image by uploading a file at <code>public${img}</code>.</p>
-  </article>
+  <CharacterFile
+    name={name}
+    portrait={portrait}
+    bio={bio}
+    role="Subject Record // Human"
+    fields={fields}
+    bgUrl="/images/characters/character-file.jpg"   /* shared background */
+  >
+    <!-- Optional: actions (links, buttons) -->
+    <div slot="actions" class="flex flex-wrap gap-2">
+      <a href="/machine/story" class="px-3 py-2 rounded-lg border border-white/20 bg-white/10 hover:bg-white/20 transition text-sm">
+        View story
+      </a>
+      <a href="/songs/laurel" class="px-3 py-2 rounded-lg border border-white/20 bg-white/10 hover:bg-white/20 transition text-sm">
+        Listen to “Laurel”
+      </a>
+    </div>
+  </CharacterFile>
 </BaseLayout>

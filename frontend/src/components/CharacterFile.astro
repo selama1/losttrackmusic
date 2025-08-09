@@ -1,0 +1,42 @@
+---
+const { name, portrait, bio, role, fields = [], bgUrl } = Astro.props;
+---
+
+<div 
+  class="min-h-screen bg-cover bg-center p-8" 
+  style={`background-image: url('${bgUrl}')`}
+>
+  <div class="max-w-3xl mx-auto bg-black/50 p-6 rounded-lg border border-white/20 shadow-lg mt-24">
+    
+    <!-- Character Name -->
+    <h1 class="text-5xl font-bold text-white tracking-wide mb-2">
+      {name}
+    </h1>
+    <p class="text-sm text-amber-200 mb-6">{role}</p>
+
+    <!-- Portrait -->
+    <img 
+      src={portrait} 
+      alt={name} 
+      loading="lazy" 
+      class="w-full aspect-[16/9] object-cover rounded border border-white/20 mb-4"
+    />
+
+    <!-- Bio -->
+    <p class="bg-white/10 border border-white/20 p-4 rounded font-mono text-sm text-amber-100 tracking-wide shadow-lg">
+      {bio}
+    </p>
+
+    <!-- Extra Fields -->
+    {fields.length > 0 && (
+      <dl class="mt-6 grid grid-cols-2 gap-4 text-amber-100 font-mono text-xs">
+        {fields.map(field => (
+          <div>
+            <dt class="uppercase tracking-widest text-amber-300">{field.label}</dt>
+            <dd>{field.value}</dd>
+          </div>
+        ))}
+      </dl>
+    )}
+  </div>
+</div>

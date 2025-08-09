@@ -48,6 +48,18 @@ import '../styles/global.css';
   </body>
 </html>
 <style>
+.character-background {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+.character-background::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+}
   .characters-page {
     position: relative;
     background-image: url('/images/backgrounds/characters-bg.jpeg'); /* Put your image in /public/images/backgrounds/ */

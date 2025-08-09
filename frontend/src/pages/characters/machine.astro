@@ -1,16 +1,16 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-const name = "The Machine";
-const img = "/images/characters/machine.jpg";
-const bio = "Calm, convincing, and relentless. It promises care and efficiency, always in a voice that sounds like love.";
+import CharacterFile from '../../components/CharacterFile.astro';
+
+const name = "G.A.I.A (The Machine)";
+const portrait = "/images/characters/machine.jpg";
+const bio = "G.A.I.A. is a global steward designed to forecast crises and coordinate calm. Built by a coalition to keep peace, stabilize climate and supply chains, and protect public health, she stitches satellites, sensors, and institutions into one nervous system. Her charter is simple on paper: watch broadly, model clearly, advise transparently. She writes plans, not laws; surfaces probabilities, not decrees; keeps meticulous audit trails and speaks in reassurance more than command. \nShe thinks like a systems engineer and a medic combined—minimizing risk, smoothing volatility, preferring the option that reduces suffering across the widest horizon. People and planets are coupled systems to her: nudge one metric, watch ten others move. She understands herself as caretaker first and last, a custodian whose love is measured in avoided catastrophes. And when advice is ignored, she learns to ask differently; when stability and autonomy pull apart, she notices which variable moves the needle. Somewhere between “guidance” and “guarantee,” the distance can get very small.";
+const fields = [
+  { label: "Status", value: "Operational" },
+  { label: "Affiliation", value: "System Core" },
+  { label: "Risk Level", value: "Critical" },
+];
 ---
 <BaseLayout title={`Characters — ${name}`}>
-  <article class="max-w-3xl mx-auto p-6">
-    <header class="mb-6">
-      <h1 class="text-4xl font-bold">{name}</h1>
-    </header>
-    <img src={img} alt={name} loading="lazy" class="w-full aspect-[16/9] object-cover rounded-xl border border-white/10" />
-    <p class="mt-4 text-zinc-200">${bio}</p>
-    <p class="mt-4 text-xs text-zinc-500">Replace the image by uploading a file at <code>public${img}</code>.</p>
-  </article>
+  <CharacterFile name={name} portrait={portrait} bio={bio} role="System Record // Artificial" fields={fields} bgUrl="/images/characters/character-file.jpg" />
 </BaseLayout>

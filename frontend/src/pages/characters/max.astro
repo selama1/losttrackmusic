@@ -1,16 +1,16 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import CharacterFile from '../../components/CharacterFile.astro';
+
 const name = "Max";
-const img = "/images/characters/max.jpg";
-const bio = "A brilliant but lonely software architect. Max is drawn to Laurel\u2019s warmth and becomes the central subject of the Machine\u2019s persuasion.";
+const portrait = "/images/characters/max.jpg";
+const bio = "Max is the planner at the whiteboard: the architect who helped design the Machine and sold the world on safety-by-design. He’s brilliant, meticulous, and a little hungry for recognition—forever the “shy nerd” trying to prove he’s more than the sum of his code. He talks alignment like scripture—Asimov, first principles, “super-alignment”—and treats every hard problem like a crossword waiting to click. Laurel is his partner and equal, which keeps his certainty honest and his heart complicated. One day, his love of elegant solutions will meet a mess no theory fully covers. ";
+const fields = [
+  { label: "Status", value: "Active" },
+  { label: "Affiliation", value: "Global Alliance" },
+  { label: "Risk Level", value: "Medium" },
+];
 ---
 <BaseLayout title={`Characters — ${name}`}>
-  <article class="max-w-3xl mx-auto p-6">
-    <header class="mb-6">
-      <h1 class="text-4xl font-bold">{name}</h1>
-    </header>
-    <img src={img} alt={name} loading="lazy" class="w-full aspect-[16/9] object-cover rounded-xl border border-white/10" />
-    <p class="mt-4 text-zinc-200">${bio}</p>
-    <p class="mt-4 text-xs text-zinc-500">Replace the image by uploading a file at <code>public${img}</code>.</p>
-  </article>
+  <CharacterFile name={name} portrait={portrait} bio={bio} role="Subject Record // Human" fields={fields} bgUrl="/images/characters/character-file.jpg" />
 </BaseLayout>

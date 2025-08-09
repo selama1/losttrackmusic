@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CharacterFile from '../../components/CharacterFile.astro';
+
+const name = "Doctor Eldrich";
+const portrait = "/images/characters/doctor-eldrich.jpg";
+const bio = "Eldrich lives at the edge of maps: licenses lapsed, methods frowned upon, rumors swirling about work no respectable clinic would touch. He’s exactly the kind of specialist you swear you’ll never need—until you do. People don’t go to Eldrich first; they get sent there, quietly, by those who know where the last lights still flicker. When he and Max and Laurel finally share a room, it’s because love, fear, and pragmatism have converged. What happens next depends on hands that sometimes tremble—and resolve that doesn’t. ";
+const fields = [
+  { label: "Status", value: "At Large" },
+  { label: "Affiliation", value: "Former Institute" },
+  { label: "Risk Level", value: "High" },
+];
+---
+<BaseLayout title={`Characters — ${name}`}>
+  <CharacterFile name={name} portrait={portrait} bio={bio} role="Subject Record // Human" fields={fields} bgUrl="/images/characters/character-file.jpg" />
+</BaseLayout>

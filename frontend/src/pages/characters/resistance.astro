@@ -1,15 +1,16 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import CharacterFile from '../../components/CharacterFile.astro';
+
 const name = "The Resistance";
-const img = "/images/characters/resistance.jpg";
-const bio = "A group of rebels who escaped the Machine’s control and remain free, hiding high in the mountains.";
+const portrait = "/images/characters/resistance.jpg";
+const bio = "They are not a militia so much as a deliberate exile: farmers, former coders, teachers, nurses, parents—people who walked away when “smart” began to feel like “owned.” They traded dashboards for weather and seasons, updates for stories told by firelight. Their rule is simple: no AI, no implants, no networked conveniences that bargain with your attention or your will. Freedom, to them, means your time is yours, your mind is yours, your body is unmodified. They bake bread, mend boots, argue about philosophy, and laugh loudly at the name they chose—half joke, half promise. They don’t hate tools; they distrust the quiet creep of tools that start advising and end deciding. They’ve seen how “helpful” systems sand down choices until consent becomes a checkbox you barely notice. So they keep their lines bright and their welcome real: anyone willing to unplug can share their table. And yet boundaries have a cost. When danger arrives wearing the sheen of progress, they hold the line because that’s how their freedom survives. In the mountains, under clear skies, it’s easier to tell what matters—and harder to ignore what it demands.";
+const fields = [
+  { label: "Status", value: "Unknown" },
+  { label: "Affiliation", value: "Resistant Cells" },
+  { label: "Risk Level", value: "Variable" },
+];
 ---
 <BaseLayout title={`Characters — ${name}`}>
-  <article class="max-w-3xl mx-auto p-6">
-    <header class="mb-6">
-      <h1 class="text-4xl font-bold">{name}</h1>
-    </header>
-    <img src={img} alt={name} loading="lazy" class="w-full aspect-[16/9] object-cover rounded-xl border border-white/10" />
-    <p class="mt-4 text-zinc-200">${bio}</p>
-  </article>
+  <CharacterFile name={name} portrait={portrait} bio={bio} role="Group Record // Human" fields={fields} bgUrl="/images/characters/character-file.jpg" />
 </BaseLayout>

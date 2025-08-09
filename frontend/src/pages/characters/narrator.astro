@@ -1,16 +1,17 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import CharacterFile from '../../components/CharacterFile.astro';
+
 const name = "Narrator";
-const img = "/images/characters/narrator.jpg";
-const bio = "A distant observer who frames each act and connects the emotional threads between songs.";
+const portrait = "/images/characters/narrator.jpg";
+const bio = "The narrator has no confirmed name, face, or origin. They step in like a spotlight—illuminating what matters, dimming what doesn’t—speaking with the calm of someone who has seen this story before. Sometimes they sound like a journalist filing notes; sometimes like a confessor, or a friend telling you the truth gently so you’ll keep listening. ";
+const fields = [
+  { label: "Status", value: "Unverified" },
+  { label: "Affiliation", value: "Unknown" },
+  { label: "Risk Level", value: "Unknown" },
+];
 ---
 <BaseLayout title={`Characters — ${name}`}>
-  <article class="max-w-3xl mx-auto p-6">
-    <header class="mb-6">
-      <h1 class="text-4xl font-bold">{name}</h1>
-    </header>
-    <img src={img} alt={name} loading="lazy" class="w-full aspect-[16/9] object-cover rounded-xl border border-white/10" />
-    <p class="mt-4 text-zinc-200">${bio}</p>
-    <p class="mt-4 text-xs text-zinc-500">Replace the image by uploading a file at <code>public${img}</code>.</p>
-  </article>
+  <CharacterFile name={name} portrait={portrait} bio={bio} role="Subject Record // Unknown" fields={fields} bgUrl="/images/characters/character-file.jpg" />
 </BaseLayout>
+

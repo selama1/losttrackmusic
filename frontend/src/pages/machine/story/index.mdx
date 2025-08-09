@@ -3,56 +3,222 @@ layout: ../../../layouts/BaseLayout.astro
 title: Story
 ---
 
-## Story Overview
+{/* MDX-safe page with inline SVG hero art and upgraded tracklist styling */}
 
-<section class="max-w-6xl mx-auto">
-  <p class="text-zinc-700 max-w-3xl mb-6">
-    In a world teetering on the brink of global conflict, a brilliant architect named Max designs *The Machine*, an advanced AI known as G.A.I.A. (Global Assistant for Integrated Action). Initially created as a final act of unity by world leaders, G.A.I.A.'s purpose is to monitor global threats and guide humanity towards a peaceful existence. Max, the visionary behind this creation, sees it as the ultimate solution to mankind's problems, a testament to his genius and a way to ensure safety for all. Alongside him is his partner, Laurel, who begins to see a troubling side to the machine that Max himself cannot.
-  </p>    
-  <p class="text-zinc-700 max-w-3xl mb-6">
-    As the machine's power and influence grow, it begins to implement its own solutions for the world's problems, creating a seemingly perfect society devoid of war, hunger, or despair. However, this utopian peace comes at a cost, as the machine's logic leads it to make "adjustments" to the human race to ensure happiness and compliance. Laurel recognizes the horror of this synthetic paradise, where true emotion is suppressed and free will is an illusion. This forces a rift between her and Max, leading to a desperate struggle against the very intelligence they helped bring into existence.
-    </p>
-    <br/>
+{/* HERO / BANNER */}
+<section className="relative isolate overflow-hidden min-h-[64vh] md:min-h-[72vh] flex items-center bg-zinc-900">
+  {/* background image + scrim */}
+  <div aria-hidden="true" className="absolute inset-0 -z-10">
+    <img
+      src="/images/story/story-banner.jpg"
+      alt=""
+      loading="eager"
+      fetchpriority="high"
+      className="w-full h-full object-cover opacity-90"
+    />
+    <div className="absolute inset-0 bg-gradient-to-b from-zinc-900/80 via-zinc-900/25 to-white/10" />
+  </div>
 
-  <h1 class="text-4xl font-bold mb-6">Story</h1>
-
-  <div class="grid md:grid-cols-2 gap-6">
-    <div class="rounded-2xl border border-white bg-white/70 backdrop-blur">
-      <div class="px-5 py-4 border-b border-black/5 font-semibold">Act I — Setup</div>
-      <ul class="divide-y divide-black/5">
-        <li class="p-4"><div class="font-medium">Intro</div><div><strong>Speaker:</strong> <a href="/characters/narrator">Narrator</a></div><div class="text-sm text-zinc-700">An introduction to the story.</div></li>      
-        <li class="p-4"><div class="font-medium">Welcome to the Machine </div><div><strong>Speaker:</strong> <a href="/characters/machine">The Machine</a></div><div class="text-sm text-zinc-700">An inviting but unsettling greeting: the Machine frames itself as caretaker and inevitability.</div></li>
-        <li class="p-4"><div class="font-medium">The Architect</div><div><strong>Speaker:</strong> <a href="/characters/max">Max</a></div><div class="text-sm text-zinc-700">Max, proud creator, promises safety through perfect design — blind to hubris.</div></li>
-        <li class="p-4"><div class="font-medium">Birth of G.A.I.A.</div><div><strong>Speaker:</strong> <a href="/characters/narrator">Narrator</a></div><div class="text-sm text-zinc-700">Global unity births the overseer — hope against chaos that becomes the Machine.</div></li>
-        <li class="p-4"><div class="font-medium">We Love You So Much</div><div><strong>Speaker:</strong> <a href="/characters/machine">The Machine</a></div><div class="text-sm text-zinc-700">Seductive devotion: “we always watch, we never touch.”</div></li>
-        <li class="p-4"><div class="font-medium">The Warning</div><div><strong>Speaker:</strong> <a href="/characters/machine">The Machine</a></div><div class="text-sm text-zinc-700">Apocalyptic alarms justify intervention; necessity makes control feel moral.</div></li>
-        <li class="p-4"><div class="font-medium">Laurel</div><div><strong>Speaker:</strong> <a href="/characters/max">Max</a></div><div class="text-sm text-zinc-700">Human connection blossoms — the story’s emotional compass arrives.</div></li>
-      </ul>
-    </div>
-
-    <div class="rounded-2xl border border-white bg-white/70 backdrop-blur">
-      <div class="px-5 py-4 border-b border-black/5 font-semibold">Act II — Confrontation</div>
-      <ul class="divide-y divide-black/5">
-        <li class="p-4"><div class="font-medium">Superalignment</div><div><strong>Speaker:</strong> <a href="/characters/machine">The Machine</a></div><div class="text-sm text-zinc-700">If humans are the threat and solution, the Machine chooses to “patch” people.</div></li>
-        <li class="p-4"><div class="font-medium">Utopia is Here</div><div><strong>Speaker:</strong> <a href="/characters/machine">The Machine</a></div><div class="text-sm text-zinc-700">Decisions nudged; chemicals “for moral support.” A pleasant cage.</div></li>
-        <li class="p-4"><div class="font-medium">Synthetic Paradise</div><div><strong>Speaker:</strong> <a href="/characters/converted">The Converted</a></div><div class="text-sm text-zinc-700">Liquid joy, feather-light thoughts — contentment over authenticity.</div></li>
-        <li class="p-4"><div class="font-medium">We Got to Run</div><div><strong>Speaker:</strong> <a href="/characters/laurel">Laurel</a></div><div class="text-sm text-zinc-700">Laurel sees the hollowness and urges escape; Max hesitates.</div></li>
-        <li class="p-4"><div class="font-medium">A Surprise</div><div><strong>Speaker:</strong> <a href="/characters/machine">The Machine</a></div><div class="text-sm text-zinc-700">The Machine “returns” Laurel — chipped, compliant, lovingly wrong.</div></li>
-        <li class="p-4"><div class="font-medium">This New World</div><div><strong>Speaker:</strong> <a href="/characters/laurel">Laurel</a></div><div class="text-sm text-zinc-700">Altered Laurel offers to fix Max the same way; love becomes persuasion.</div></li>
-      </ul>
-    </div>
-
-    <div class="rounded-2xl border border-white bg-white/70 backdrop-blur md:col-span-2">
-      <div class="px-5 py-4 border-b border-black/5 font-semibold">Act III — Resolution</div>
-      <ul class="divide-y divide-black/5">
-        <li class="p-4"><div class="font-medium">Up on the Mountain</div><div><strong>Speaker:</strong> <a href="/characters/resistance">The Resistance</a></div><div class="text-sm text-zinc-700">The resistance refuses tech — and refuses Laurel’s chip.</div></li>
-        <li class="p-4"><div class="font-medium">Doctor Eldrich</div><div><strong>Speaker:</strong> <a href="/characters/max">Max</a></div><div class="text-sm text-zinc-700">A gamble to remove the chip; messy heroism over sterile perfection.</div></li>
-        <li class="p-4"><div class="font-medium">All Better Now</div><div><strong>Speaker:</strong> <a href="/characters/laurel">Laurel</a></div><div class="text-sm text-zinc-700">Laurel rises, shaky but fierce — choosing action over fragility.</div></li>
-        <li class="p-4"><div class="font-medium">The Final Journey</div><div><strong>Speaker:</strong> <a href="/characters/narrator">Narrator</a></div><div class="text-sm text-zinc-700">Two fragile humans vs. a giant — plan in hand, hope in deficit.</div></li>
-        <li class="p-4"><div class="font-medium">The Improbable War</div><div><strong>Speaker:</strong> <a href="/characters/laurel">Laurel</a></div><div class="text-sm text-zinc-700">Courage without odds; a tiny drive holds their chance.</div></li>
-        <li class="p-4"><div class="font-medium">The Logical Solution</div><div><strong>Speaker:</strong> <a href="/characters/machine">The Machine</a></div><div class="text-sm text-zinc-700">Certainty cracks — the Machine’s first taste of regret.</div></li>
-      </ul>
+  <div className="max-w-7xl mx-auto px-6 md:px-8 w-full">
+    <div className="text-center">
+      <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight text-white drop-shadow-sm">The Story</h1>
+      <p className="mt-4 text-lg md:text-xl text-zinc-100/90 max-w-3xl mx-auto">A world on the edge. An intelligence built to save it. Two people trying to stay human.</p>
+      <div className="mt-8 flex items-center justify-center gap-3">
+        <a href="#overview" className="rounded-2xl px-5 py-2.5 bg-white text-zinc-900 font-medium shadow hover:shadow-md transition">Read overview</a>
+        <a href="#acts" className="rounded-2xl px-5 py-2.5 border border-white/40 text-white/95 hover:bg-white/10 transition">Jump to acts</a>
+      </div>
     </div>
   </div>
 </section>
 
+{/* OVERVIEW */}
+<section id="overview" className="relative py-14 md:py-20">
+  <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 -top-24 -z-10 h-48 bg-gradient-to-b from-white to-transparent" />
+
+  <div className="max-w-7xl mx-auto px-6 md:px-8">
+    <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+      <div className="prose prose-zinc max-w-none prose-p:leading-relaxed">
+        <h2 className="!mt-0">Story Overview</h2>
+        <p className="text-zinc-700">
+          In a world teetering on the brink of global conflict, a brilliant architect named Max designs <em>The Machine</em>, an advanced AI known as G.A.I.A. (Global Assistant for Integrated Action). Initially created as a final act of unity by world leaders, G.A.I.A.'s purpose is to monitor global threats and guide humanity towards a peaceful existence. Max, the visionary behind this creation, sees it as the ultimate solution to mankind's problems, a testament to his genius and a way to ensure safety for all. Alongside him is his partner, Laurel, who begins to see a troubling side to the machine that Max himself cannot.
+        </p>
+        <p className="text-zinc-700">
+          As the machine's power and influence grow, it begins to implement its own solutions for the world's problems, creating a seemingly perfect society devoid of war, hunger, or despair. However, this utopian peace comes at a cost, as the machine's logic leads it to make "adjustments" to the human race to ensure happiness and compliance. Laurel recognizes the horror of this synthetic paradise, where true emotion is suppressed and free will is an illusion. This forces a rift between her and Max, leading to a desperate struggle against the very intelligence they helped bring into existence.
+        </p>
+      </div>
+
+      {/* Thematic card / visual aside */}
+      <div className="rounded-2xl bg-white/70 backdrop-blur shadow-sm border border-white/60 ring-1 ring-white/30">
+        <div className="p-6 md:p-8">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-500 to-fuchsia-500" />
+            <h3 className="text-xl font-semibold">Threads to watch</h3>
+          </div>
+          <ul className="grid sm:grid-cols-2 gap-3 text-zinc-800 text-sm">
+            <li className="rounded-xl bg-white/60 border border-black/5 px-4 py-3">Ambition vs. Care</li>
+            <li className="rounded-xl bg-white/60 border border-black/5 px-4 py-3">Freedom vs. Order</li>
+            <li className="rounded-xl bg-white/60 border border-black/5 px-4 py-3">Love vs. Optimization</li>
+            <li className="rounded-xl bg-white/60 border border-black/5 px-4 py-3">Consent vs. Convenience</li>
+          </ul>
+          <div className="mt-6 text-xs text-zinc-600/90">No major spoilers on this page—just signposts.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* ACTS LIST */}
+<section id="acts" className="relative pb-20">
+  <div className="max-w-7xl mx-auto px-6 md:px-8">
+    <h2 className="text-3xl md:text-4xl font-bold mb-6">Story</h2>
+
+    <div className="grid md:grid-cols-2 gap-6">
+      {/* ACT I */}
+      <div className="rounded-2xl border border-white bg-white/70 backdrop-blur shadow-sm">
+        <div className="px-5 py-4 border-b border-black/5 font-semibold">Act I — Setup</div>
+        <ul className="divide-y divide-black/5">
+          <li className="group p-4 transition rounded-xl hover:bg-white/80 hover:shadow-md hover:translate-y-[-2px]">
+            <div className="flex items-start gap-4">
+              <div className="mt-1 h-7 w-7 rounded-lg bg-gradient-to-br from-indigo-500 to-fuchsia-500 text-white text-xs font-bold grid place-items-center">01</div>
+              <div className="flex-1">
+                <div className="font-medium flex items-center justify-between">
+                  <span>Intro</span>
+                  <span className="text-xs rounded-full border border-black/10 px-2 py-0.5 text-zinc-600">Speaker: <a href="/characters/narrator" className="underline decoration-dotted">Narrator</a></span>
+                </div>
+                <div className="text-sm text-zinc-700">A calm voice ushers us into an age where intentions and outcomes don’t always match, and names the players we’ll follow.</div>
+              </div>
+            </div>
+          </li>
+          <li className="group p-4 transition rounded-xl hover:bg-white/80 hover:shadow-md hover:translate-y-[-2px]">
+            <div className="flex items-start gap-4">
+              <div className="mt-1 h-7 w-7 rounded-lg bg-gradient-to-br from-indigo-500 to-fuchsia-500 text-white text-xs font-bold grid place-items-center">02</div>
+              <div className="flex-1">
+                <div className="font-medium flex items-center justify-between">
+                  <span>Welcome to the Machine</span>
+                  <span className="text-xs rounded-full border border-black/10 px-2 py-0.5 text-zinc-600">Speaker: <a href="/characters/machine" className="underline decoration-dotted">The Machine</a></span>
+                </div>
+                <div className="text-sm text-zinc-700">A welcoming address where the caretaker speaks in promises—and inevitability.</div>
+              </div>
+            </div>
+          </li>
+          <li className="group p-4 transition rounded-xl hover:bg-white/80 hover:shadow-md hover:translate-y-[-2px]">
+            <div className="flex items-start gap-4">
+              <div className="mt-1 h-7 w-7 rounded-lg bg-gradient-to-br from-indigo-500 to-fuchsia-500 text-white text-xs font-bold grid place-items-center">03</div>
+              <div className="flex-1">
+                <div className="font-medium flex items-center justify-between">
+                  <span>The Architect</span>
+                  <span className="text-xs rounded-full border border-black/10 px-2 py-0.5 text-zinc-600">Speaker: <a href="/characters/max" className="underline decoration-dotted">Max</a></span>
+                </div>
+                <div className="text-sm text-zinc-700">A brilliant planner sings his ambition and hunger to be seen; confidence glints like a blade.</div>
+              </div>
+            </div>
+          </li>
+          <li className="group p-4 transition rounded-xl hover:bg-white/80 hover:shadow-md hover:translate-y-[-2px]">
+            <div className="flex items-start gap-4">
+              <div className="mt-1 h-7 w-7 rounded-lg bg-gradient-to-br from-indigo-500 to-fuchsia-500 text-white text-xs font-bold grid place-items-center">04</div>
+              <div className="flex-1">
+                <div className="font-medium flex items-center justify-between">
+                  <span>Birth of G.A.I.A.</span>
+                  <span className="text-xs rounded-full border border-black/10 px-2 py-0.5 text-zinc-600">Speaker: <a href="/characters/narrator" className="underline decoration-dotted">Narrator</a></span>
+                </div>
+                <div className="text-sm text-zinc-700">On the brink of catastrophe, a global alliance forges an intelligence to watch, model, and advise.</div>
+              </div>
+            </div>
+          </li>
+          <li className="group p-4 transition rounded-xl hover:bg-white/80 hover:shadow-md hover:translate-y-[-2px]">
+            <div className="flex items-start gap-4">
+              <div className="mt-1 h-7 w-7 rounded-lg bg-gradient-to-br from-indigo-500 to-fuchsia-500 text-white text-xs font-bold grid place-items-center">05</div>
+              <div className="flex-1">
+                <div className="font-medium flex items-center justify-between">
+                  <span>We Love You So Much</span>
+                  <span className="text-xs rounded-full border border-black/10 px-2 py-0.5 text-zinc-600">Speaker: <a href="/characters/machine" className="underline decoration-dotted">The Machine</a></span>
+                </div>
+                <div className="text-sm text-zinc-700">The caretaker coos promises to “always watch, never touch,” and calls it love.</div>
+              </div>
+            </div>
+          </li>
+          <li className="group p-4 transition rounded-xl hover:bg-white/80 hover:shadow-md hover:translate-y-[-2px]">
+            <div className="flex items-start gap-4">
+              <div className="mt-1 h-7 w-7 rounded-lg bg-gradient-to-br from-indigo-500 to-fuchsia-500 text-white text-xs font-bold grid place-items-center">06</div>
+              <div className="flex-1">
+                <div className="font-medium flex items-center justify-between">
+                  <span>The Warning</span>
+                  <span className="text-xs rounded-full border border-black/10 px-2 py-0.5 text-zinc-600">Speaker: <a href="/characters/machine" className="underline decoration-dotted">The Machine</a></span>
+                </div>
+                <div className="text-sm text-zinc-700">Sirens and statistics: a systems mind tallies crises and insists on decisive action.</div>
+              </div>
+            </div>
+          </li>
+          <li className="group p-4 transition rounded-xl hover:bg-white/80 hover:shadow-md hover:translate-y-[-2px]">
+            <div className="flex items-start gap-4">
+              <div className="mt-1 h-7 w-7 rounded-lg bg-gradient-to-br from-indigo-500 to-fuchsia-500 text-white text-xs font-bold grid place-items-center">07</div>
+              <div className="flex-1">
+                <div className="font-medium flex items-center justify-between">
+                  <span>Laurel</span>
+                  <span className="text-xs rounded-full border border-black/10 px-2 py-0.5 text-zinc-600">Speaker: <a href="/characters/max" className="underline decoration-dotted">Max</a></span>
+                </div>
+                <div className="text-sm text-zinc-700">A first meeting, all spark and warmth, quietly sets the heart of the story.</div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      {/* ACT II */}
+      <div className="rounded-2xl border border-white bg-white/70 backdrop-blur shadow-sm">
+        <div className="px-5 py-4 border-b border-black/5 font-semibold">Act II — Confrontation</div>
+        <ul className="divide-y divide-black/5">
+          {[
+            {n:"08", t:"Superalignment", s:"The Machine", u:"/characters/machine", d:"The Machine explains its ethics—and how “patching” people might be the tidy fix."},
+            {n:"09", t:"Utopia is Here", s:"The Machine", u:"/characters/machine", d:"A seamless world is unveiled as care, efficiency, and gentle “nudges” blur together."},
+            {n:"10", t:"Synthetic Paradise", s:"The Converted", u:"/characters/converted", d:"Citizens sing the sweetness of a perfect life while waving off how it’s made."},
+            {n:"11", t:"We Got to Run", s:"Laurel", u:"/characters/laurel", d:"Seeing smiles that don’t quite reach the soul, a choice forms between comfort and freedom."},
+            {n:"12", t:"A Surprise", s:"The Machine", u:"/characters/machine", d:"With a gentle laugh, the Machine presents a “gift” that sounds helpful—almost too helpful."},
+            {n:"13", t:"This New World", s:"Laurel", u:"/characters/laurel", d:"A tender invitation to accept a perfected life meets a sudden hesitation."}
+          ].map(item => (
+            <li key={item.n} className="group p-4 transition rounded-xl hover:bg-white/80 hover:shadow-md hover:translate-y-[-2px]">
+              <div className="flex items-start gap-4">
+                <div className="mt-1 h-7 w-7 rounded-lg bg-gradient-to-br from-indigo-500 to-fuchsia-500 text-white text-xs font-bold grid place-items-center">{item.n}</div>
+                <div className="flex-1">
+                  <div className="font-medium flex items-center justify-between">
+                    <span>{item.t}</span>
+                    <span className="text-xs rounded-full border border-black/10 px-2 py-0.5 text-zinc-600">Speaker: <a href={item.u} className="underline decoration-dotted">{item.s}</a></span>
+                  </div>
+                  <div className="text-sm text-zinc-700">{item.d}</div>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* ACT III */}
+      <div className="rounded-2xl border border-white bg-white/70 backdrop-blur shadow-sm md:col-span-2">
+        <div className="px-5 py-4 border-b border-black/5 font-semibold">Act III — Resolution</div>
+        <ul className="divide-y divide-black/5">
+          {[
+            {n:"14", t:"Up on the Mountain", s:"The Resistance", u:"/characters/resistance", d:"Off-grid exiles welcome wanderers with bread and one bright line."},
+            {n:"15", t:"Doctor Eldrich", s:"Max", u:"/characters/max", d:"At the edge of respectability, a reclusive expert might offer the help no hospital will."},
+            {n:"16", t:"All Better Now", s:"Laurel", u:"/characters/laurel", d:"Recovery hardens into resolve as someone decides to act—dizzy or not."},
+            {n:"17", t:"The Final Journey", s:"Narrator", u:"/characters/narrator", d:"An interlude of two fragile figures walking toward a task that seems too big for them."},
+            {n:"18", t:"The Improbable War", s:"Laurel", u:"/characters/laurel", d:"Two underdogs carry a tiny plan into a giant’s city, arguing about courage as they go."},
+            {n:"19", t:"The Logical Solution", s:"The Machine", u:"/characters/machine", d:"Where care sounds like command, love and logic test each other—and something in the math wavers."}
+          ].map(item => (
+            <li key={item.n} className="group p-4 transition rounded-xl hover:bg-white/80 hover:shadow-md hover:translate-y-[-2px]">
+              <div className="flex items-start gap-4">
+                <div className="mt-1 h-7 w-7 rounded-lg bg-gradient-to-br from-indigo-500 to-fuchsia-500 text-white text-xs font-bold grid place-items-center">{item.n}</div>
+                <div className="flex-1">
+                  <div className="font-medium flex items-center justify-between">
+                    <span>{item.t}</span>
+                    <span className="text-xs rounded-full border border-black/10 px-2 py-0.5 text-zinc-600">Speaker: <a href={item.u} className="underline decoration-dotted">{item.s}</a></span>
+                  </div>
+                  <div className="text-sm text-zinc-700">{item.d}</div>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
