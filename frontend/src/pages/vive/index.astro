@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// Track list used for small stats chips
+const tracks = [
+  { slug: 'life-department', title: 'Life Department' },
+  { slug: 'a-day-in-life', title: 'A Day in Life' },
+  { slug: 'roller-coaster', title: 'Roller Coaster' },
+  { slug: 'better', title: 'Better' },
+  { slug: 'cooped-up', title: 'Cooped Up' },
+  { slug: 'i-will-write-this-song-tomorrow', title: 'I Will Write This Song Tomorrow' },
+  { slug: 'the-response', title: 'The Response' },
+  { slug: 'flying-away', title: 'Flying Away' },
+  { slug: 'why-are-we-here', title: 'Why Are We Here' },
+  { slug: 'this-is-why-we-sleep', title: 'This Is Why We Sleep' },
+  { slug: 'stream-of-thoughts', title: 'Stream of Thoughts' },
+  { slug: 'the-roller-coaster-reprise', title: 'The Roller Coaster (Reprise)' },
+  { slug: 'public-safety-announcement', title: 'Public Safety Announcement' }
+];
+---
+<BaseLayout title="Vive La Existence">
+  <!-- HERO / CINEMATIC BANNER -->
+  <section class="relative isolate overflow-hidden">
+    <!-- Background image (swap to your real one) -->
+    <img
+      src="/images/vive/vive-banner.jpg"
+      alt="Soft morning light over a kitchen table with coffee and notebooks"
+      class="absolute inset-0 h-full w-full object-cover object-[center_30%]"
+      loading="eager"
+      fetchpriority="high"
+    />
+
+    <!-- Scrims for legibility -->
+    <div class="absolute inset-0 bg-[radial-gradient(1200px_600px_at_70%_10%,rgba(59,130,246,0.25),transparent_70%)]"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-zinc-900/80 via-zinc-900/10 to-white/10"></div>
+    <div class="absolute inset-0 mix-blend-overlay opacity-20 bg-[linear-gradient(120deg,rgba(255,255,255,.25)_0%,rgba(255,255,255,0)_35%),radial-gradient(600px_300px_at_20%_20%,rgba(255,255,255,.15),transparent_60%)]"></div>
+    <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/85 to-transparent md:hidden"></div>
+
+    <!-- Headline & CTA -->
+    <div class="relative z-10 mx-auto max-w-7xl w-full px-6 md:px-8 min-h-[70svh] md:min-h-[78vh] flex items-end">
+      <div class="w-full pb-10 md:pb-16 text-center md:text-left max-w-4xl">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white drop-shadow">Vive La Existence</h1>
+        <p class="mt-4 text-base sm:text-lg md:text-xl text-white/90 max-w-2xl md:max-w-3xl md:pr-10 mx-auto md:mx-0">A wry, intimate album about everyday rituals, doomscrolling, and the tiny miracles that keep us human.</p>
+        <div class="mt-7 flex flex-wrap gap-3 justify-center md:justify-start">
+          <a href="/vive/lyrics" class="rounded-2xl px-5 py-2.5 bg-white text-zinc-900 font-medium shadow hover:shadow-md hover:-translate-y-0.5 transition">Read the lyrics</a>
+          <a href="/vive/music" class="rounded-2xl px-5 py-2.5 border border-white/40 text-white/95 hover:bg-white/10 backdrop-blur-sm transition">Listen to the music</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED NAV CARDS -->
+  <section class="relative py-14 md:py-20">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Lyrics card -->
+        <a href="/vive/lyrics" class="group block rounded-2xl overflow-hidden border border-white/70 bg-white/70 backdrop-blur shadow-sm hover:shadow-lg transition">
+          <div class="relative h-40">
+            <img src="/images/vive/lyrics-banner.jpg" alt="Open notebook with scribbled lyrics and coffee ring" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
+            <div class="absolute bottom-3 left-3 text-white text-sm px-2 py-1 rounded bg-white/10 border border-white/20">{tracks.length} tracks</div>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-semibold">Lyrics</h3>
+              <span class="text-xs rounded-full border border-black/10 px-2 py-0.5 text-zinc-600 group-hover:bg-black/5">Read</span>
+            </div>
+            <p class="mt-2 text-sm text-zinc-700">Track‑by‑track lyrics with quick jump links.</p>
+          </div>
+        </a>
+
+        <!-- Music card -->
+        <a href="/vive/music" class="group block rounded-2xl overflow-hidden border border-white/70 bg-white/70 backdrop-blur shadow-sm hover:shadow-lg transition">
+          <div class="relative h-40">
+            <img src="/images/music/waveform.jpg" alt="Music waveform" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
+            <div class="absolute bottom-3 left-3 text-white text-sm px-2 py-1 rounded bg-white/10 border border-white/20">{tracks.length} tracks</div>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-semibold">Music</h3>
+              <span class="text-xs rounded-full border border-black/10 px-2 py-0.5 text-zinc-600 group-hover:bg-black/5">Listen</span>
+            </div>
+            <p class="mt-2 text-sm text-zinc-700">Indie pop, dream‑folk, and playful interludes—built for headphones.</p>
+          </div>
+        </a>
+
+        <!-- Notes card (optional) -->
+        <a href="/vive/notes" class="group block rounded-2xl overflow-hidden border border-white/70 bg-white/70 backdrop-blur shadow-sm hover:shadow-lg transition">
+          <div class="relative h-40">
+            <img src="/images/vive/notes.jpg" alt="Sticky notes and pen on a desk" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
+            <div class="absolute bottom-3 left-3 text-white text-sm px-2 py-1 rounded bg-white/10 border border-white/20">Behind the scenes</div>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-semibold">Notes</h3>
+              <span class="text-xs rounded-full border border-black/10 px-2 py-0.5 text-zinc-600 group-hover:bg-black/5">Explore</span>
+            </div>
+            <p class="mt-2 text-sm text-zinc-700">Process snippets, inspirations, and little easter eggs.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUBSCRIBE -->
+  <section id="subscribe" class="relative py-14 md:py-20">
+    <div class="max-w-3xl mx-auto px-6 md:px-8">
+      <div class="rounded-2xl border border-white/70 bg-white/70 backdrop-blur p-6 md:p-8 shadow-sm">
+        <h2 class="text-2xl font-semibold">Get updates</h2>
+        <p class="mt-2 text-zinc-700">Be first to hear new tracks, behind‑the‑scenes notes, and release news.</p>
+        <div class="mt-5">
+          <script async data-uid="1c06fc89eb" src="https://lost-track.kit.com/1c06fc89eb/index.js"></script>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* optional light film grain using CSS, no assets needed */
+  .grain:before{content:'';position:absolute;inset:0;opacity:.07;pointer-events:none;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/></filter><rect width="120" height="120" filter="url(%23n)" opacity="0.35"/></svg>');mix-blend-mode:overlay}
+</style>

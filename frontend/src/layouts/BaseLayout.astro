@@ -1,7 +1,16 @@
 ---
-const { title = 'Lost Track', description = 'Soundtracks for alternate futures' } = Astro.props;
+const {
+  title = 'Lost Track',
+  description = 'Soundtracks for alternate futures'
+} = Astro.props;
+
 import '../styles/global.css';
-import Analytics from '@vercel/analytics/astro'
+import Analytics from '@vercel/analytics/astro';
+
+// Auto-open the Albums menu when you're on an album route
+const isAlbum =
+  Astro.url.pathname.startsWith('/machine') ||
+  Astro.url.pathname.startsWith('/vive-la-existence');
 ---
 <html lang="en">
   <head>
@@ -20,17 +29,34 @@ import Analytics from '@vercel/analytics/astro'
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content="/hero-machine.svg" />
   </head>
+
   <body class="min-h-screen">
-    <header class="sticky top-0 backdrop-blur bg-white/40 border-b border-black/10">
+    <!-- Header sits on a higher z-layer so dropdown stays clickable above heroes -->
+    <header class="sticky top-0 z-[60] backdrop-blur bg-white/40 border-b border-black/10">
       <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
         <a href="/" class="font-extrabold text-xl">Lost Track</a>
-        <div class="flex gap-2 text-sm">
-          <a class="px-3 py-2 rounded-xl hover:bg-black/5" href="/machine">The Rise and Fall of the Machine</a>
+
+        <div class="flex items-center gap-2 text-sm">
+          <!-- Albums dropdown (no JS; uses details/summary) -->
+          <details class="relative group" open={isAlbum}>
+            <summary class="px-3 py-2 rounded-xl hover:bg-black/5 cursor-pointer list-none flex items-center gap-1 pointer-events-auto">
+              Albums
+              <svg class="h-4 w-4 transition-transform group-open:rotate-180" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.17l3.71-2.94a.75.75 0 011.04 1.08l-4.24 3.36a.75.75 0 01-.95 0L5.21 8.31a.75.75 0 01.02-1.1z" clip-rule="evenodd" />
+              </svg>
+            </summary>
+            <div class="absolute right-0 mt-2 min-w-[16rem] rounded-xl border border-black/10 bg-white/95 backdrop-blur shadow-lg p-1 z-[70]">
+              <a href="/machine" class="block px-3 py-2 rounded-lg hover:bg-black/5">The Rise and Fall of the Machine</a>
+              <a href="/vive" class="block px-3 py-2 rounded-lg hover:bg-black/5">Vive La Existence</a>
+            </div>
+          </details>
+
           <a class="px-3 py-2 rounded-xl hover:bg-black/5" href="/blog">Blog</a>
           <a class="px-3 py-2 rounded-xl hover:bg-black/5" href="/about">About</a>
         </div>
       </nav>
     </header>
+
     <main class={`px-6 py-10 ${Astro.url.pathname.includes('/machine/characters') ? 'characters-page' : ''}`}>
       <slot />
     </main>
@@ -39,28 +65,38 @@ import Analytics from '@vercel/analytics/astro'
       <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-zinc-600 flex items-center justify-between">
         <span>© {new Date().getFullYear()} Lost Track</span>
         <div class="flex gap-3">
-  <a href="https://instagram.com/losttrackmusic" class="hover:text-black" target="_blank" rel="noreferrer">Instagram</a>
-  <a href="https://www.youtube.com/@losttrackmusic" class="hover:text-black" target="_blank" rel="noreferrer">YouTube</a>
-  <a href="https://x.com/losttrackmusic" class="hover:text-black" target="_blank" rel="noreferrer">X</a>
-  <a href="https://www.tiktok.com/@losttrackmusic" class="hover:text-black" target="_blank" rel="noreferrer">TikTok</a>
-</div>
+          <a href="https://instagram.com/losttrackmusic" class="hover:text-black" target="_blank" rel="noreferrer">Instagram</a>
+          <a href="https://www.youtube.com/@losttrackmusic" class="hover:text-black" target="_blank" rel="noreferrer">YouTube</a>
+          <a href="https://x.com/losttrackmusic" class="hover:text-black" target="_blank" rel="noreferrer">X</a>
+          <a href="https://www.tiktok.com/@losttrackmusic" class="hover:text-black" target="_blank" rel="noreferrer">TikTok</a>
+        </div>
       </div>
     </footer>
+
+    {/** If you want the component, uncomment the next line and ensure versions match */}
+    {/** <Analytics /> */}
   </body>
 </html>
+
 <style>
-.character-background {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
-}
-.character-background::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-}
+  /* hide default marker on <summary> */
+  summary::-webkit-details-marker { display: none; }
+
+  /* rotate chevron as a progressive enhancement even without group-open support */
+  details[open] summary svg { transform: rotate(180deg); }
+
+  .character-background {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+  }
+  .character-background::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+  }
   .characters-page {
     position: relative;
     background-image: url('/images/backgrounds/characters-bg.jpeg'); /* Put your image in /public/images/backgrounds/ */
@@ -69,7 +105,6 @@ import Analytics from '@vercel/analytics/astro'
     background-attachment: fixed;
     color: white;
   }
-
   /* Dark overlay for readability */
   .characters-page::before {
     content: "";
@@ -78,7 +113,6 @@ import Analytics from '@vercel/analytics/astro'
     background: rgba(0, 0, 0, 0.5);
     z-index: 0;
   }
-
   /* Make sure content appears above overlay */
   .characters-page > * {
     position: relative;
