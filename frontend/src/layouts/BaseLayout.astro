@@ -1,28 +1,48 @@
 ---
-const {
-  title = 'Lost Track',
-  description = 'Soundtracks for alternate futures'
-} = Astro.props;
-
 import '../styles/global.css';
 import Analytics from '@vercel/analytics/astro';
+import SubscribeForm from '../components/SubscribeForm.astro';
 
-// Auto-open the Albums menu when you're on an album route
+// Props (simple assignments avoid parser edge cases)
+const p = Astro.props as {
+  title?: string;
+  description?: string;
+  pageId?: string;
+  showStickySignup?: boolean;
+  showExitIntent?: boolean;
+  convertKitFormId?: string;
+};
+
+const title = p.title ?? 'Lost Track';
+const description = p.description ?? 'Soundtracks for alternate futures';
+const pageId = p.pageId ?? 'generic';
+const showStickySignup = p.showStickySignup ?? true;
+const showExitIntent = p.showExitIntent ?? true;
+const convertKitFormId = p.convertKitFormId ?? import.meta.env.PUBLIC_CONVERTKIT_FORM_ID;
+
+// Album dropdown auto-open
 const isAlbum =
   Astro.url.pathname.startsWith('/machine') ||
-  Astro.url.pathname.startsWith('/vive-la-existence');
+  Astro.url.pathname.startsWith('/vive-la-existence') ||
+  Astro.url.pathname.startsWith('/nope');  
+
+const siteUrl = new URL(Astro.url.pathname, Astro.site);
 ---
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>{title}</title>
-    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+
+    <link rel="canonical" href={siteUrl} />
     <meta name="description" content={description} />
+
+    <!-- OG / Twitter -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site)} />
+    <meta property="og:url" content={siteUrl} />
     <meta property="og:image" content="/hero-machine.svg" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
@@ -31,6 +51,10 @@ const isAlbum =
   </head>
 
   <body class="min-h-screen">
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:bg-black/80 focus:text-white focus:px-3 focus:py-2 focus:rounded-lg">
+      Skip to content
+    </a>
+
     <!-- Header sits on a higher z-layer so dropdown stays clickable above heroes -->
     <header class="sticky top-0 z-[60] backdrop-blur bg-white/40 border-b border-black/10">
       <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
@@ -46,18 +70,19 @@ const isAlbum =
               </svg>
             </summary>
             <div class="absolute right-0 mt-2 min-w-[16rem] rounded-xl border border-black/10 bg-white/95 backdrop-blur shadow-lg p-1 z-[70]">
-              <a href="/machine" class="block px-3 py-2 rounded-lg hover:bg-black/5">The Rise and Fall of the Machine</a>
-              <a href="/vive" class="block px-3 py-2 rounded-lg hover:bg-black/5">Vive La Existence</a>
+              <a href="/machine" class="block px-3 py-2 rounded-lg hover:bg-black/5" aria-current={Astro.url.pathname === '/machine' ? 'page' : undefined}>The Rise and Fall of the Machine</a>
+              <a href="/vive" class="block px-3 py-2 rounded-lg hover:bg-black/5" aria-current={Astro.url.pathname === '/vive' ? 'page' : undefined}>Vive La Existence</a>
+              <a href="/nope-and-zonders" class="block px-3 py-2 rounded-lg hover:bg-black/5" aria-current={Astro.url.pathname === '/nope-and-zonders' ? 'page' : undefined}>Songs of Nope and Zonders</a>
             </div>
           </details>
 
-          <a class="px-3 py-2 rounded-xl hover:bg-black/5" href="/blog">Blog</a>
-          <a class="px-3 py-2 rounded-xl hover:bg-black/5" href="/about">About</a>
+          <a class="px-3 py-2 rounded-xl hover:bg-black/5" href="/blog" aria-current={Astro.url.pathname.startsWith('/blog') ? 'page' : undefined}>Blog</a>
+          <a class="px-3 py-2 rounded-xl hover:bg-black/5" href="/about" aria-current={Astro.url.pathname.startsWith('/about') ? 'page' : undefined}>About</a>
         </div>
       </nav>
     </header>
 
-    <main class={`px-6 py-10 ${Astro.url.pathname.includes('/machine/characters') ? 'characters-page' : ''}`}>
+    <main id="main" class={`px-6 py-10 ${Astro.url.pathname.includes('/machine/characters') ? 'characters-page' : ''}`}>
       <slot />
     </main>
 
@@ -73,16 +98,67 @@ const isAlbum =
       </div>
     </footer>
 
-    {/** If you want the component, uncomment the next line and ensure versions match */}
-    {/** <Analytics /> */}
+    {/* Mobile sticky signup bar (shows after scroll). Only if ConvertKit ID present. */}
+    {showStickySignup && convertKitFormId && (
+      <div id="sticky-sub" class="fixed left-0 right-0 bottom-0 z-[70] hidden md:hidden border-t border-black/10 bg-white/95 backdrop-blur">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center gap-2">
+          <SubscribeForm formId={convertKitFormId} source={`sticky-${pageId}`} buttonText="Join" placeholder="Get the lore booklet" />
+          <button type="button" class="ml-auto text-zinc-600 hover:text-black text-xl" aria-label="Dismiss" onclick="document.getElementById('sticky-sub')?.remove()">×</button>
+        </div>
+      </div>
+    )}
+
+    {/* Desktop exit-intent modal (once per user). Only if ConvertKit ID present. */}
+    {showExitIntent && convertKitFormId && (
+      <div id="exit-modal" class="fixed inset-0 z-[80] hidden place-items-center bg-black/60">
+        <div class="bg-white/95 backdrop-blur border border-black/10 shadow-xl rounded-2xl max-w-md w-[92%] p-5">
+          <button type="button" class="float-right text-zinc-600 hover:text-black text-xl" aria-label="Close" onclick="document.getElementById('exit-modal').style.display='none'">×</button>
+          <h3 class="text-lg font-semibold mb-3">Get the spoiler-safe lore + overture?</h3>
+          <SubscribeForm formId={convertKitFormId} source={`exit-${pageId}`} buttonText="Send it" />
+          <p class="text-xs text-zinc-600 mt-2">Unlocks extended booklet on release day.</p>
+        </div>
+      </div>
+    )}
+
+    {/* <Analytics /> */}
+    <script is:inline>
+      // Sticky bar: show after scroll (mobile only; CSS hides on md+)
+      (function(){
+        var sticky = document.getElementById('sticky-sub');
+        if(!sticky) return;
+        var shown = false;
+        window.addEventListener('scroll', function(){
+          if(!shown && window.scrollY > 320){
+            shown = true;
+            sticky.style.display = 'block';
+          }
+        }, { passive: true });
+      })();
+
+      // Exit-intent: desktop only (pointer=fine), once per user
+      (function(){
+        var modal = document.getElementById('exit-modal');
+        if(!modal) return;
+        var seen = localStorage.getItem('exit-shown') === '1';
+        var isDesktop = matchMedia('(pointer:fine)').matches;
+        var armed = false;
+        if (seen || !isDesktop) return;
+        document.addEventListener('mousemove', function(e){
+          if(!armed && e.clientY < 10){
+            armed = true;
+            modal.style.display = 'grid';
+            localStorage.setItem('exit-shown','1');
+          }
+        });
+      })();
+    </script>
   </body>
 </html>
 
 <style>
   /* hide default marker on <summary> */
   summary::-webkit-details-marker { display: none; }
-
-  /* rotate chevron as a progressive enhancement even without group-open support */
+  /* rotate chevron even without group-open support */
   details[open] summary svg { transform: rotate(180deg); }
 
   .character-background {
@@ -99,13 +175,12 @@ const isAlbum =
   }
   .characters-page {
     position: relative;
-    background-image: url('/images/backgrounds/characters-bg.jpeg'); /* Put your image in /public/images/backgrounds/ */
+    background-image: url('/images/backgrounds/characters-bg.jpeg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     color: white;
   }
-  /* Dark overlay for readability */
   .characters-page::before {
     content: "";
     position: absolute;
@@ -113,9 +188,11 @@ const isAlbum =
     background: rgba(0, 0, 0, 0.5);
     z-index: 0;
   }
-  /* Make sure content appears above overlay */
   .characters-page > * {
     position: relative;
     z-index: 1;
   }
+
+  /* Screen-reader utility for skip link */
+  .sr-only{position:absolute;clip:rect(0 0 0 0);clip-path:inset(50%);width:1px;height:1px;overflow:hidden;white-space:nowrap}
 </style>

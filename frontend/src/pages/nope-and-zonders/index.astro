@@ -1,0 +1,663 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const tracks = [
+  {
+    slug: 'safety-in-numbers',
+    title: 'Safety in Numbers',
+    description: 'A nostalgic look back at a life spent finding comfort and pride in the certainty of numbers.',
+    lyrics: `When I look back at my life
+Ehmmm
+I could be [*pause*] proud
+
+I did what I should
+Been a real pro-fessional
+And I was quite good
+
+[passionate, deeper low baritone voice]
+I was quite good
+
+[chorus: faster, more energetic]
+Two plus two is four
+Four plus four is eight
+Eighteen plus six is twenty four
+And I love you more
+
+Safety in numbers
+Safety in numbers
+
+I ran the numbers
+Double checked it is all great
+Add box fifteen to box twenty eight
+We didn't have computers
+And I did it all by hand
+
+[passionate, deeper voice]
+I did it all by hand
+
+[chorus]
+Two plus two is four
+Four plus four is eight
+Eighteen plus six is twenty four
+And I love you more
+
+Safety in numbers
+Safety in numbers
+
+You say it's not that glorious
+But it made us good dough
+You say I played it safe
+But at tax season, though
+
+I always helped you save
+[passionate]
+always helped you save
+
+[chorus]
+Two plus two is four
+Four plus four is eight
+Eighteen plus six is twenty four
+And I love you more
+
+Safety in numbers
+Safety in numbers`
+  },
+  {
+    slug: 'tell-me-more',
+    title: 'Tell Me More',
+    description: 'A folk fairy tale about a perfectly normal family whose story takes an unexpected turn.',
+    lyrics: `[Folk fairy tale]
+Once upon a time
+There was a man
+A normal man
+Just like the most
+Not a mirage
+Or a ghost
+
+He had a wife, you know
+A normal wife
+Just like any other woman
+Just like that
+And they lived
+A normal life
+
+[chorus: harmonic choir]
+Tell me more
+I want to know
+Please pray tell
+How the story ends
+
+The had two children
+A girl and a boy
+And I cannot tell a lie
+They were just
+Like you and I
+Regular Joes
+
+They were not bad at school
+Not at all
+Not too good either
+Just like that
+Right in the middle
+And that's it
+
+Tell me more
+I want to know
+Please pray tell
+How the story ends
+
+The story end
+Not with a bang
+But with a whimper
+With a bumper sticker
+A boring dad joke
+And then a stroke
+
+It was quite unexpected
+Not normal at all
+Not what the average family
+want to be told
+Luckily he survived
+Everything is well
+
+Tell me more
+I want to know
+Please pray tell
+How the story ends`
+  },
+  {
+    slug: 'bretta',
+    title: 'Bretta',
+    description: 'A raw, emotional tribute to a lost love, filled with memories and longing.',
+    lyrics: `I miss you Bretta, so much
+There is no day I don't think of you
+You were the light of my life
+You were my one and only wife
+Why have you gone?
+Why did you leave me alone?
+
+[chorus: heartfelt. Chocking. Coughing. Almost crying]
+Bretta, Bretta, my love
+A day with no end
+Bretta, Bretta, my love
+One day we'll meet again
+
+I remember it so well
+It was a sunny Sunday morning
+You said you don't feel well
+I was running to the phone
+One moment you were there
+The next you were gone
+
+[chorus]
+Bretta, Bretta, my love
+A day with no end
+Bretta, Bretta, my love
+One day we'll meet again
+
+I see your face everywhere I look
+I see you image in the phonebook
+I think of you when I'm sad
+I smell you when I go to bed
+I see your ghost on the TV
+I see your picture, you and me
+
+[chorus]
+Bretta, Bretta, my love
+A day with no end
+Bretta, Bretta, my love
+One day we'll meet again`
+  },
+  {
+    slug: 'stream-of-thoughts',
+    title: 'Stream of Thoughts',
+    description: 'A quiet reflection on finding peace and a place of rest when feeling lost.',
+    youtubeId: 'aLGbkcTutpg', 
+    lyrics: `There are days like this
+With no end
+There are days like this
+When I'm lost
+
+What I would like the most
+What I would want most of all
+Is to lay my head down
+Close my eyes
+And let my thoughts fly
+To a different world
+
+[chorus]
+When my mind wonders
+When I am lost
+Before I go bonkers
+And there's cost
+I come back here
+
+A place where I could
+Lay my head
+A place of quiet of peace
+My new bed
+
+What I would dream the most
+What I would yearn most of all
+Is to wave hello
+Open my eyes
+Faintly smile
+And let my emotions flood
+overcome me
+
+[chorus]
+When my mind wonders
+When I am lost
+Before I go bonkers
+And there's cost
+I come back here`
+  },
+  {
+    slug: 'eleven-pm-feast',
+    title: 'Eleven PM Feast',
+    description: 'A garage rock tragedy about the universal struggle of late-night hunger and an empty fridge.',
+    lyrics: `[garqage rock]
+This is my tragedy
+My source of duress
+When my tummy is rumbling
+At 11 PM
+
+"Feed me" she says
+And I Uh-blige
+
+[Bridge: Violine solo]
+
+[chorus: introspective]
+I open the fridge
+Nothing to eat
+Nothing I like, anyway
+So sad
+So sad
+
+This is my quandary
+To eat I must
+I hope you agree
+An old tired man
+To satisfy he must
+Listen to his gut
+
+I open the fridge
+Yet once again
+Nothing new there to eat
+So sad
+So sad
+
+Would I just go to sleep
+Lie on empty stomach?
+Doctor says it's good for me
+I should agree
+But my intestines
+Ask for spree
+
+[chorus]
+I open the fridge
+Third time this night
+No steak or dessert
+So sad
+So sad`
+  },
+  {
+    slug: 'evil-clowns-from-outer-space',
+    title: 'Evil Clowns from Outer Space',
+    description: 'A nightmarish lullaby about a global conspiracy, lizard people, and stolen mail.',
+    lyrics: `[intro: mysterious, nightmarish lullaby]
+There is a global conspiracy
+An evil kah-bal
+A group of lizard people
+Living next door
+And they may go to hell
+
+They are here to steal my mail
+They are going it again
+I will not let this stand
+
+[chorus: angry, agitated]
+Evil clowns from outer space
+Stop messing with my life
+I've seen it all
+I know you're there
+You can no longer hide.
+There is a global secrecy
+An evil band of wusses
+Who work for the government
+And keep steal my glasses
+
+Prey tell, you miscreants
+Why do you need it?
+Just leave me alone
+Just go, away. Away.
+
+[chorus]
+Evil clowns from outer space
+Stop messing with my life
+I've seen it all
+I know you're there
+You can no longer hide.
+There was a car at the front
+It looked awfully suspicious
+I do not have no visitors
+I do not drive a Mercedes
+
+So I called 911
+Reported it to the police
+But they are all in cahoots
+They did not do zilch
+
+[chorus]
+Evil clowns from outer space
+Stop messing with my life
+I've seen it all
+I know you're there
+You can no longer hide.`
+  },
+  {
+    slug: 'the-circus-is-in-town',
+    title: 'The Circus is in Town',
+    description: 'A whimsical anthem about the hope of starting a new life and learning new tricks, no matter your age.',
+    lyrics: `[Singing tone is whimsical]
+I will join the circus
+With the rhinos and the monkeys
+I will leave it all behind
+And start new life
+
+I will learn to ride the unicycle
+I will jump on the trapeze
+I will flip in the air
+Everyone will be amazed
+
+[chorus: theatrical and forceful]
+Any time good for a change
+To be something else
+To do something strange
+To dare and to hope
+New tricks for old dog
+
+It is still not too late
+Even though I'm seventy eight
+To learn new tricks
+To fetch new bone
+
+I am kind of alone
+And I don't like it at all
+But when I'm in the circus
+I will have a ball
+
+[chorus]
+Any time good for a change
+To be something else
+To do something strange
+To dare and to hope
+New tricks for old dog
+
+I saw them passing by today
+With all those trailers and trucks
+They are erecting a new tent
+Going there is just few bucks
+
+I will come and say hello
+And show them what I can
+They will be so impressed
+They will ask me to join them
+
+[chorus]
+Any time good for a change
+To be something else
+To do something strange
+To dare and to hope
+New tricks for old dog`
+  },
+  {
+    slug: 'one-more-song',
+    title: 'One More Song',
+    description: 'A desperate, late-night plea from a musician who can\'t stop creating.',
+    lyrics: `Late at night
+Time to sleep
+To take a bath
+and go to bed
+
+[dramatic]
+But I won't sleep
+No I won't
+
+[chorus: desperate]
+I need to write
+Just one more song
+One more line
+One more word
+I will not stop
+Till I drop dead
+aaayyyyyyyyy!
+Computer blinks
+Screen flickers
+I flicker back
+My eye blinks
+My fingers flinch
+Ready to type
+
+[chorus]
+I need to write
+Just one more song
+One more line
+One more word
+I will not stop
+Till I drop dead
+aaayyyyyyyyy!
+The bed calls
+but I ignore
+Just one more minute
+One more song
+One more pun
+And I'll be done
+
+[chorus]
+I need to write
+Just one more song
+One more line
+One more word
+I will not stop
+Till I drop dead
+aaayyyyyyyyy!`
+  },
+  {
+    slug: 'the-good-old-days',
+    title: 'The Good Old Days',
+    description: 'A medieval-inspired dance tune reminiscing about a simpler time of payphones, iceboxes, and one-room sheds.',
+    lyrics: `[Intro: medieval dance music]
+When I was your age, child
+We didn't have smartphones
+We didn't have computers
+We didn't have tablets
+
+We have this payphone
+At the end of the street
+We stood there in the rain
+And waited for it
+And we had a dime
+To call again
+
+[chorus: More forceful, more joyful]
+Those were the times
+The happy times
+Where everything was simple
+Everything was pure
+What wouldn't I give
+To go back
+
+When I was your age, child
+We didn't have a fridge
+We didn't have a freezer
+We didn't have a range
+
+We had an icebox
+To keep food cool
+We had a fireplace with woods
+To cook it all good
+We cooked in huge cast iron pots
+And it tasted so good
+
+[chorus]
+Those were the times
+The happy times
+Where everything was simple
+Everything was pure
+What wouldn't I give
+To go back
+
+When I was your age, child
+We didn't have three bedrooms
+We didn't have a yard
+We didn't have elevators
+
+We were all in one bedroom
+With my grandpa and aunt
+In a shed made of card boxes
+That got soggy when it rains
+And sometimes blew off
+When there were trains
+
+[chorus]
+Those were the times
+The happy times
+Where everything was simple
+Everything was pure
+What wouldn't I give
+To go back`
+  },
+  {
+    slug: 'good-to-be-here',
+    title: 'Good to be Here',
+    description: 'A circus hip-hop track about finding simple joys, from a comfy couch to a good breakfast.',
+    lyrics: `[circus hip-hop]
+I sat today near the fireplace
+This fake electric fireplace
+Made by Amish folks
+The couch is so comfy
+The fake fire so warm
+And I feel good
+
+[chorus: clean, happy, harmonic]
+And I think How maybe
+It's so nice to be in this world
+To see it all with my eyes
+To live through it all
+The good and the bad
+
+I made me some eggs this morning
+Breakfast was quite good
+I even grilled some bacon
+It came out like it should
+I was satisfied
+In a good mood
+
+[chorus]
+And I think How maybe
+It's so nice to be in this world
+To see it all with my eyes
+To live through it all
+The good and the bad
+
+I had phone-call this evening
+Grand-kids are just fine!
+Daughter in law got new job
+My son is going to the gym
+For a second week in a row!
+I am quite impressed
+
+[chorus]
+And I think How maybe
+It's so nice to be in this world
+To see it all with my eyes
+To live through it all
+The good and the bad`
+  }
+];
+---
+<BaseLayout title="Songs of Nope and Zonders">
+  <section class="relative isolate overflow-hidden">
+    <img
+      src="/images/nope/nope-banner.jpg"
+      alt="An old man sitting on a porch with a guitar"
+      class="absolute inset-0 h-full w-full object-cover object-center"
+      loading="eager"
+      fetchpriority="high"
+    />
+
+    <div class="absolute inset-0 bg-gradient-to-t from-zinc-900/80 via-zinc-900/20 to-transparent"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(800px_400px_at_50%_20%,rgba(107,114,128,0.3)_0%,transparent_60%)]"></div>
+    
+    <div class="relative z-10 mx-auto max-w-7xl w-full px-6 md:px-8 min-h-[70svh] md:min-h-[78vh] flex items-end">
+      <div class="w-full pb-10 md:pb-16 text-center md:text-left max-w-4xl">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white drop-shadow">Songs of Nope and Zonders</h1>
+        <p class="mt-4 text-base sm:text-lg md:text-xl text-white/90 max-w-2xl md:max-w-3xl md:pr-10 mx-auto md:mx-0">The debut album from a 78-year-old retired accountant about his life, his love, and his nostalgic yearn for the good old days.</p>
+        <div class="mt-7 flex flex-wrap gap-3 justify-center md:justify-start">
+          <a href="#listen" class="rounded-2xl px-5 py-2.5 bg-white text-zinc-900 font-medium shadow hover:shadow-md hover:-translate-y-0.5 transition">Listen to the music</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="overview" class="relative py-14 md:py-20">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+      <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+        <div class="prose prose-zinc max-w-none">
+          <h2 class="mt-0 text-3xl md:text-4xl font-bold">Album Overview</h2>
+          <p class="text-zinc-700">
+            Meet Leon Conrad, a 78-year-old retired accountant who spent a lifetime finding comfort in the certainty of numbers. When his beloved wife, Bretta, passed away, Leon found himself navigating a world of grief and profound loneliness.
+          </p>
+          <p>In a surprising turn, after a brief and unsuccessful attempt to run away with the circus, he discovered a new calling in music. Pouring his heart into his songs, Leon's debut album is a collection of tales about his life, his enduring love for Bretta, and a powerful nostalgia for the simpler "good old days."</p>
+          <p class="text-sm text-zinc-600">(And yes, he doesn't really exist. But don't you wish he did?)</p>
+        </div>
+        <div class="rounded-2xl bg-white/70 backdrop-blur shadow-sm border border-white/60 ring-1 ring-white/30">
+          <div class="p-6 md:p-8">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-slate-500 to-sky-700"></div>
+              <h3 class="text-xl font-semibold">Themes</h3>
+            </div>
+            <ul class="grid sm:grid-cols-2 gap-3 text-zinc-800 text-sm">
+              <li class="rounded-xl bg-white/60 border border-black/5 px-4 py-3">Love & Loss</li>
+              <li class="rounded-xl bg-white/60 border border-black/5 px-4 py-3">Nostalgia</li>
+              <li class="rounded-xl bg-white/60 border border-black/5 px-4 py-3">Finding New Purpose</li>
+              <li class="rounded-xl bg-white/60 border border-black/5 px-4 py-3">The Absurdity of Life</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="listen" class="relative py-10 md:py-14">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+      <div class="rounded-2xl border border-white/70 bg-white/70 backdrop-blur p-6 md:p-8 shadow-sm">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <h1 class="text-2xl md:text-3xl font-bold">Listen & Read</h1>
+          <div class="text-sm text-zinc-600">{tracks.length} tracks</div>
+        </div>
+
+        <div class="mt-4 flex flex-wrap gap-2">
+          <a href="#" class="rounded-xl px-4 py-2 bg-black text-white text-sm hover:opacity-90">Spotify</a>
+          <a href="#" class="rounded-xl px-4 py-2 bg-red-600 text-white text-sm hover:opacity-90">YouTube</a>
+          <a href="#" class="rounded-xl px-4 py-2 bg-pink-600 text-white text-sm hover:opacity-90">Apple Music</a>
+          <a href="#" class="rounded-xl px-4 py-2 border border-zinc-300 text-zinc-800 hover:bg-black/5">Bandcamp</a>
+        </div>
+
+        <div class="mt-8 grid md:grid-cols-2 gap-6">
+          {tracks.map((t, idx) => (
+            <div class="rounded-2xl border border-zinc-200/70 bg-white/80 p-4 md:p-5">
+              <div class="flex items-start gap-4">
+                <div class="mt-1 h-7 w-7 rounded-lg bg-gradient-to-br from-slate-500 to-sky-700 text-white text-xs font-bold grid place-items-center flex-shrink-0">{String(idx+1).padStart(2, '0')}</div>
+                <div class="flex-1">
+                  <h3 class="font-semibold text-lg leading-6">{t.title}</h3>
+                  <p class="text-sm text-zinc-700" set:html={t.description} />
+                  
+                  <div class="mt-3">
+                    {t.youtubeId ? (
+                      <div class="aspect-video overflow-hidden rounded-xl border border-zinc-200/70">
+                        <iframe
+                          src={`https://www.youtube.com/embed/${t.youtubeId}`}
+                          title={`YouTube video player for ${t.title}`}
+                          frameborder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowfullscreen
+                          class="w-full h-full"
+                        ></iframe>
+                      </div>
+                    ) : (
+                      <audio controls preload="none" src={`/audio/nope-and-zonders/${t.slug}.mp3`} class="w-full"></audio>
+                    )}
+                  </div>
+                  
+                  <details class="mt-3 rounded-xl border border-zinc-200/70 bg-white/80">
+                    <summary class="cursor-pointer select-none px-3 py-2 text-sm text-zinc-800">Read lyrics</summary>
+                    <div class="px-3 pb-3 pt-1 whitespace-pre-wrap leading-7 text-zinc-800" set:html={t.lyrics} />
+                  </details>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="subscribe" class="relative py-14 md:py-20">
+    <div class="max-w-3xl mx-auto px-6 md:px-8">
+      <div class="rounded-2xl border border-white/70 bg-white/70 backdrop-blur p-6 md:p-8 shadow-sm">
+        <h2 class="text-2xl font-semibold">Get updates</h2>
+        <p class="mt-2 text-zinc-700">Be first to hear new tracks and release news from Leon Conrad.</p>
+        <div class="mt-5">
+          <script async data-uid="YOUR_CONVERTKIT_ID" src="https://YOUR_ACCOUNT.ck.page/YOUR_PAGE/index.js"></script>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* optional light film grain using CSS, no assets needed */
+  .grain:before{content:'';position:absolute;inset:0;opacity:.07;pointer-events:none;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/></filter><rect width="120" height="120" filter="url(%23n)" opacity="0.35"/></svg>');mix-blend-mode:overlay}
+</style>

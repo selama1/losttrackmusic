@@ -1,0 +1,84 @@
+---
+/**
+ * Reusable subscribe form
+ * - mode="kit": renders the Kit (ConvertKit) JS snippet
+ * - mode="html": renders a normal HTML form (for sticky bars/modals)
+ */
+export interface Props {
+  mode?: 'kit' | 'html';
+  /* KIT (JS snippet) */
+  kitUid?: string;           // e.g. "1c06fc89eb"
+  kitHost?: string;          // e.g. "lost-track.kit.com"
+  /* HTML (direct form post) */
+  formId?: string;           // ConvertKit Form ID, e.g. "1234567"
+  action?: string;           // full action; if set, overrides formId
+  fields?: Record<string,string>; // extra hidden fields (fields[foo]=bar)
+  source?: string;           // tracked placement, e.g. "home-hero"
+
+  heading?: string;
+  description?: string;
+  class?: string;
+  placeholder?: string;
+  buttonText?: string;
+}
+
+const {
+  mode = 'kit',
+  kitUid,
+  kitHost = 'lost-track.kit.com',
+  formId,
+  action,
+  fields = {},
+  source = 'inline',
+  heading = 'Get updates',
+  description = 'Be first to hear new tracks, behind-the-scenes notes, and release news.',
+  class: className = '',
+  placeholder = 'you@example.com',
+  buttonText = 'Get the booklet & overture'
+} = Astro.props;
+
+const actionUrl = action ?? (formId ? `https://app.convertkit.com/forms/${formId}/subscriptions` : '#');
+const useKit = mode === 'kit';
+---
+
+<section id="subscribe" class={`relative ${className}`}>
+  <div class="max-w-3xl mx-auto px-6 md:px-8">
+    <div class="rounded-2xl border border-white/70 bg-white/70 backdrop-blur p-6 md:p-8 shadow-sm">
+      <h2 class="text-2xl font-semibold">{heading}</h2>
+      <p class="mt-2 text-zinc-700">{description}</p>
+
+      <div class="mt-5">
+        {useKit ? (
+          // KIT SNIPPET MODE (your original code, componentized)
+          <>
+            <script async data-uid={kitUid} src={`https://${kitHost}/${kitUid}/index.js`}></script>
+            <noscript>
+              <a href={`https://${kitHost}/${kitUid}`} class="underline">Join the mailing list</a>
+            </noscript>
+          </>
+        ) : (
+          // LIGHT HTML MODE (good for sticky/footer variants)
+          <form action={actionUrl} method="post" class="ck-sub">
+            <label for={`ck_email_${source}`} class="sr-only">Email</label>
+            <input id={`ck_email_${source}`} name="email_address" type="email" required autocomplete="email"
+                   placeholder={placeholder}
+                   class="flex-1 min-w-[220px] px-3 py-2 rounded-lg border border-black/10 bg-white/70 backdrop-blur" />
+            {Object.entries(fields).map(([k,v]) => (
+              <input type="hidden" name={`fields[${k}]`} value={v} />
+            ))}
+            <input type="hidden" name="fields[source]" value={source} />
+            <button type="submit" class="px-4 py-2 rounded-lg bg-black text-white hover:bg-black/90">
+              {buttonText}
+            </button>
+            <p class="micro text-xs text-zinc-600 m-0 mt-1">No spam. Unsubscribe anytime.</p>
+          </form>
+        )}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .ck-sub{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+  .sr-only{position:absolute;clip:rect(0 0 0 0);clip-path:inset(50%);width:1px;height:1px;overflow:hidden;white-space:nowrap}
+</style>

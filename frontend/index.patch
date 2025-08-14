@@ -1,0 +1,35 @@
+diff --git a/src/pages/index.astro b/src/pages/index.astro
+--- a/src/pages/index.astro
++++ b/src/pages/index.astro
+@@
+-      <div class="grid md:grid-cols-2 gap-6">
++      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+         <!-- Machine -->
+         <a href="/machine" class="group block rounded-2xl overflow-hidden border border-white/70 bg-white/70 backdrop-blur shadow-sm hover:shadow-lg transition">
+@@
+         </a>
+ 
+         <!-- Vive La Existence -->
+         <a href="/vive" class="group block rounded-2xl overflow-hidden border border-white/70 bg-white/70 backdrop-blur shadow-sm hover:shadow-lg transition">
+@@
+           </div>
+         </a>
++
++        <!-- Songs of Nope and Zonders -->
++        <a href="/nope" class="group block rounded-2xl overflow-hidden border border-white/70 bg-white/70 backdrop-blur shadow-sm hover:shadow-lg transition">
++          <div class="relative h-48">
++            <img src="/images/nope/nope-banner.jpg" alt="Songs of Nope and Zonders banner" class="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
++            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
++            <div class="absolute bottom-3 left-3 text-white text-sm px-2 py-1 rounded bg-white/10 border border-white/20">Album</div>
++          </div>
++          <div class="p-5">
++            <div class="flex items-center justify-between">
++              <h3 class="text-lg font-semibold">Songs of Nope and Zonders</h3>
++              <span class="text-xs rounded-full border border-black/10 px-2 py-0.5 text-zinc-600 group-hover:bg-black/5">Open</span>
++            </div>
++            <p class="mt-2 text-sm text-zinc-700">Funny, tender, a little paranoid—grief, midnight snacks, reinvention.</p>
++          </div>
++        </a>
+       </div>
+     </div>
+   </section>
